@@ -17,7 +17,6 @@ Crafty.c('Grid', {
             w: 32,
             h: 24
         })
-        console.log(this.attr());
     },
 
     // Locate this entity at the given position on the grid
@@ -42,9 +41,16 @@ Crafty.c('Grid', {
 Crafty.c('Actor', {
     init: function() {
         this.requires('2D, Canvas, Grid');
+    },
+    setDirection: function(newDirection) {
+        this._direction = newDirection;
+    },
+
+
+    getDirection: function() {
+        return this._direction;
     }
 });
-
 
 Crafty.c('Wall', {
     init: function() {
@@ -55,16 +61,23 @@ Crafty.c('Wall', {
 
 Crafty.c('Box', {
     init: function() {
-        this.requires('Actor, Color, Collision, spr_box')
+        this.requires('Actor, Color, spr_box, Solid, Collision')
             .color('rgba(20, 45, 40, 0)')
             .stopOnSolids();
     },
 
+
     // Registers a stop-movement function to be called when
     //  this entity hits an entity with the "Solid" component
     stopOnSolids: function() {
-        this.onHit('Solid', this.stopMovement);
+        this.onHit('Wall', this.stopMovement);
         return this;
+    },
+
+    // Stops the movement
+    stopMovement: function() {
+        this._speed = 0;
+        this.move(this.getDirection(),-MOVEMENT_UNITS);
     }
 });
 
@@ -79,9 +92,8 @@ Crafty.c('StoreBox', {
 Crafty.c('PlayerCharacter', {
     init: function() {
         this.requires('Actor, Fourway, Color, spr_player,Collision, SpriteAnimation')
-            .fourway(4)
-//            .color('red')
-            .stopOnSolids()
+            .fourway(MOVEMENT_UNITS)
+            .stopOnWall()
             .moveBoxs()
             .animate('PlayerMovingUp',    0, 0, 2)
             .animate('PlayerMovingRight', 0, 1, 2)
@@ -92,20 +104,24 @@ Crafty.c('PlayerCharacter', {
         var animation_speed = 8;
         this.bind('NewDirection', function(data) {
             if (data.x > 0) {
+                this.setDirection('e');
                 this.animate('PlayerMovingRight', animation_speed, -1);
             } else if (data.x < 0) {
+                this.setDirection('w');
                 this.animate('PlayerMovingLeft', animation_speed, -1);
             } else if (data.y > 0) {
+                this.setDirection('s');
                 this.animate('PlayerMovingDown', animation_speed, -1);
             } else if (data.y < 0) {
+                this.setDirection('n');
                 this.animate('PlayerMovingUp', animation_speed, -1);
             } else {
                 this.stop();
             }
         });
         this.attr({
-            w: 24,
-            h: 24
+            w: 16,
+            h: 16
         })
     },
 
@@ -113,17 +129,29 @@ Crafty.c('PlayerCharacter', {
 
     // Registers a stop-movement function to be called when
     //  this entity hits an entity with the "Solid" component
-    stopOnSolids: function() {
-        this.onHit('Solid', this.stopMovement);
-    return this;
+    stopOnWall: function() {
+        this.onHit('Wall', this.stopMovement);
+        return this;
     },
+//    stopY: function() {
+//        this.onHit('StopY', this.stopMovementY);
+//        return this;
+//    },
+//    stopX: function() {
+//        this.onHit('stopX', this.stopMovementX);
+//        return this;
+//    },
 
     moveBoxs: function() {
+
         this.onHit('Box',  function(ent){
             var box = ent[0].obj;
-//            box.attr({x:new_x, y:new_y})
-            console.log(box);
-            box.attr('_y', box._y + 4);
+
+            box.move(this.getDirection(), MOVEMENT_UNITS);
+            this.move(this.getDirection(), -MOVEMENT_UNITS);
+            box.setDirection(this.getDirection());
+//            box.requires('Actor, Color, spr_box, Collision')
+//            box.attr('_y', box._y + 4);
             this.stopMovement
         });
         return this;
@@ -137,5 +165,18 @@ Crafty.c('PlayerCharacter', {
             this.y -= this._movement.y;
         }
     }
+
+//    // Stops the movement
+//    stopMovementY: function() {
+//        if (this.getDirection() == 'n' || this.getDirection() == 's' ) {
+//            this.stopMovement();
+//        }
+//    },
+//
+//    stopMovementX: function() {
+//        if (this.getDirection() == 'e' || this.getDirection() == 'w' ) {
+//            this.stopMovement();
+//        }
+//    },
 });
 

@@ -72,7 +72,7 @@ Crafty.scene('Loading', function(){
 
         // Define the PC's sprite to be the first sprite in the third row of the
         //  animation sprite map
-        Crafty.sprite(16, 'assets/hunter.png', {
+        Crafty.sprite(16, 16, 'assets/hunter.png', {
           spr_player:  [0, 2]
         }, 0, 2);
 
