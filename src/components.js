@@ -71,6 +71,7 @@ Crafty.c('Box', {
     //  this entity hits an entity with the "Solid" component
     stopOnSolids: function() {
         this.onHit('Wall', this.stopMovement);
+        this.onHit('Box', this.stopMovement);
         return this;
     },
 
