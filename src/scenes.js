@@ -30,7 +30,7 @@ Crafty.scene('Game', function() {
     }
 
     // Situamos al jugador
-    Crafty.e('PlayerCharacter').at(16, 9);
+    Crafty.e('PlayerCharacter').at(12, 9);
 });
 
 
@@ -53,7 +53,8 @@ Crafty.scene('Loading', function(){
         'assets/wall2.png',
         'assets/Bstore2.png',
         'assets/spr_player_128.png',
-        'assets/box.png'
+        'assets/box.png',
+        'assets/box_finish.png'
         ], function(){
         // Once the image is loaded...
 
@@ -78,6 +79,10 @@ Crafty.scene('Loading', function(){
 
         Crafty.sprite(32, 'assets/box.png', {
             spr_box:  [0, 0]
+        });
+
+        Crafty.sprite(32, 'assets/box_finish.png', {
+            spr_box_finish:  [0, 0]
         });
 
 
