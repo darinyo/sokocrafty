@@ -52,7 +52,7 @@ Crafty.scene('Loading', function(){
     Crafty.load([
         'assets/wall2.png',
         'assets/Bstore2.png',
-        'assets/hunter.png',
+        'assets/spr_player_128.png',
         'assets/box.png'
         ], function(){
         // Once the image is loaded...
@@ -72,9 +72,9 @@ Crafty.scene('Loading', function(){
 
         // Define the PC's sprite to be the first sprite in the third row of the
         //  animation sprite map
-        Crafty.sprite(16, 16, 'assets/hunter.png', {
+        Crafty.sprite(32, 32, 'assets/spr_player_128.png', {
           spr_player:  [0, 2]
-        }, 0, 2);
+        }, 0, 0);
 
         Crafty.sprite(32, 'assets/box.png', {
             spr_box:  [0, 0]

@@ -96,10 +96,10 @@ Crafty.c('PlayerCharacter', {
             .fourway(MOVEMENT_UNITS)
             .stopOnWall()
             .moveBoxs()
-            .animate('PlayerMovingUp',    0, 0, 2)
-            .animate('PlayerMovingRight', 0, 1, 2)
-            .animate('PlayerMovingDown',  0, 2, 2)
-            .animate('PlayerMovingLeft',  0, 3, 2);
+            .animate('PlayerMovingUp',    0, 2, 2)
+            .animate('PlayerMovingRight', 0, 3, 2)
+            .animate('PlayerMovingDown',  0, 0, 2)
+            .animate('PlayerMovingLeft',  0, 1, 2);
 
         // Watch for a change of direction and switch animations accordingly
         var animation_speed = 8;
@@ -121,8 +121,8 @@ Crafty.c('PlayerCharacter', {
             }
         });
         this.attr({
-            w: 16,
-            h: 16
+            w: 32,
+            h: 32
         })
     },
 
