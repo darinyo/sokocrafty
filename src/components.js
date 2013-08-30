@@ -122,7 +122,7 @@ Crafty.c('Box', {
     },
 
     stopByBox: function() {
-        if (this.isMoving()) {
+        if (this.getDirection()) {
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
         }
         this._speed = 0;
@@ -207,13 +207,35 @@ Crafty.c('PlayerCharacter', {
     moveBoxs: function() {
 
         this.onHit('Box',  function(ent){
+            //console.log(ent);
             var box = ent[0].obj;
-            box.moveBox(this.getDirection(), MOVEMENT_UNITS);
-            box.setDirection(this.getDirection());
-            box.setSpeed(4);
+            if (this.canMoveBox(box,this.getDirection())){
+                box.setDirection(this.getDirection());
+                box.setSpeed(MOVEMENT_UNITS);
+                box.moveBox(this.getDirection(), MOVEMENT_UNITS);
+            }
             this.stopMovement();
         });
         return this;
+    },
+
+    canMoveBox: function(box, direction) {
+        posBox = box.pos();
+        posPlayer = this.pos();
+        switch (direction) {
+            case 'w':
+                /*console.log('box:');
+                console.log(posBox);
+                console.log('player:');
+                console.log(posPlayer);*/
+                if ((posPlayer['_y'] >= posBox['_y']) && (posPlayer['_y'] <= posBox['_y'] +posBox['_h'])) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+        return true;
+
     },
 
     // Stops the movement
