@@ -101,6 +101,20 @@ Crafty.c('Box', {
             }
         });
         box._onFinish = isOnFinish;
+
+        if(isOnFinish && this.checkLevelFinished()) {
+            Crafty.scene('Loading');
+        }
+    },
+
+    checkLevelFinished: function() {
+        var levelFinished = true;
+        Crafty('Box').each(function() {
+            if (!this.isOnFinish()) {
+                levelFinished = false;
+            }
+        });
+        return levelFinished;
     },
 
     checkOnFinishPoint: function(finishPoint) {
@@ -116,14 +130,20 @@ Crafty.c('Box', {
     // Stops the movement
     stopMovement: function() {
         this._speed = 0;
-        if (this.getDirection() != undefined) {
+
+
+
+        if (this.getDirection() != undefined && this.getDirection() != null ) {
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
+            this.setDirection(null);
         }
     },
 
     stopByBox: function() {
         if (this.getDirection()) {
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
+            this.setDirection(null);
+
         }
         this._speed = 0;
     },
@@ -213,6 +233,7 @@ Crafty.c('PlayerCharacter', {
                 box.setDirection(this.getDirection());
                 box.setSpeed(MOVEMENT_UNITS);
                 box.moveBox(this.getDirection(), MOVEMENT_UNITS);
+
             }
             this.stopMovement();
         });
@@ -224,19 +245,38 @@ Crafty.c('PlayerCharacter', {
         posPlayer = this.pos();
         switch (direction) {
             case 'w':
-                /*console.log('box:');
-                console.log(posBox);
-                console.log('player:');
-                console.log(posPlayer);*/
-                if ((posPlayer['_y'] >= posBox['_y']) && (posPlayer['_y'] <= posBox['_y'] +posBox['_h'])) {
+                if ( this.isAtLeftBox(posBox, posPlayer) && this.isInlineBox(posBox, posPlayer) ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'e':
+                if ( this.isAtRightBox(posBox, posPlayer) && this.isInlineBox(posBox, posPlayer) ) {
                     return true;
                 } else {
                     return false;
                 }
         }
+
         return true;
 
     },
+
+    isAtRightBox : function (posBox, posPlayer) {
+
+        return ( posPlayer['_x'] < posBox['_x']);
+    },
+
+    isAtLeftBox : function (posBox, posPlayer) {
+
+        return ( posPlayer['_x'] > posBox['_x']);
+    },
+
+    isInlineBox : function (posBox, posPlayer) {
+
+        return (  (posPlayer['_y'] > ( posBox['_y'] -  posPlayer['_h']) + MOVEMENT_UNITS)  && ( posPlayer['_y'] < (  posBox['_y'] + posBox['_h']) - MOVEMENT_UNITS));
+    },
+
 
     // Stops the movement
     stopMovement: function() {
