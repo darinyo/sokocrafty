@@ -8,6 +8,7 @@
 
 Crafty.scene('Game', function() {
 
+    Crafty.background('url("assets/Blue.png")');
     // Pintamos el mapa
     for( var i=12; i>=0; i--){
         for( var j=21; j > 0; j--){
@@ -38,12 +39,14 @@ Crafty.scene('Game', function() {
 // -------------
 // Handles the loading of binary assets such as images and audio files
 Crafty.scene('Loading', function(){
+
+    Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.e('2D, DOM, Text')
-        .text('Loading...')
-        .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
-        .css($text_css);
+//    Crafty.e('2D, DOM, Text')
+//        .text('Loading...')
+//        .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+//        .css($text_css);
 
 
 
@@ -87,6 +90,6 @@ Crafty.scene('Loading', function(){
 
 
         // Now that our sprites are ready to draw, start the game
-        setTimeout("Crafty.scene('Game')",10);
+        setTimeout("Crafty.scene('Game')",2000);
     })
 });

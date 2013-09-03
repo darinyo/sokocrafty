@@ -102,19 +102,28 @@ Crafty.c('Box', {
         });
         box._onFinish = isOnFinish;
 
-        if(isOnFinish && this.checkLevelFinished()) {
+        if(this.checkLevelFinished()) {
             Crafty.scene('Loading');
         }
     },
 
     checkLevelFinished: function() {
         var levelFinished = true;
+        var totalBoxes = 0;
         Crafty('Box').each(function() {
             if (!this.isOnFinish()) {
                 levelFinished = false;
+            } else {
+                totalBoxes ++;
             }
         });
+        $('#boxsOnFinish').text(totalBoxes);
         return levelFinished;
+    },
+    resetBoxDirections: function() {
+        Crafty('Box').each(function() {
+            this.setDirection(null);
+        });
     },
 
     checkOnFinishPoint: function(finishPoint) {
@@ -131,8 +140,6 @@ Crafty.c('Box', {
     stopMovement: function() {
         this._speed = 0;
 
-
-
         if (this.getDirection() != undefined && this.getDirection() != null ) {
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
             this.setDirection(null);
@@ -140,7 +147,9 @@ Crafty.c('Box', {
     },
 
     stopByBox: function() {
+
         if (this.getDirection()) {
+            console.log(this);
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
             this.setDirection(null);
 
@@ -153,6 +162,11 @@ Crafty.c('Box', {
     },
 
     moveBox: function(direction, pixels) {
+
+        this.resetBoxDirections()
+        this.setDirection(direction);
+        this.setSpeed(pixels);
+
         this.move(direction, pixels);
 
         this.checkOnFinish();
@@ -230,10 +244,7 @@ Crafty.c('PlayerCharacter', {
             //console.log(ent);
             var box = ent[0].obj;
             if (this.canMoveBox(box,this.getDirection())){
-                box.setDirection(this.getDirection());
-                box.setSpeed(MOVEMENT_UNITS);
                 box.moveBox(this.getDirection(), MOVEMENT_UNITS);
-
             }
             this.stopMovement();
         });
@@ -243,6 +254,11 @@ Crafty.c('PlayerCharacter', {
     canMoveBox: function(box, direction) {
         posBox = box.pos();
         posPlayer = this.pos();
+
+//        console.log(direction);
+//        console.log(posBox);
+//        console.log(posPlayer);
+
         switch (direction) {
             case 'w':
                 if ( this.isAtLeftBox(posBox, posPlayer) && this.isInlineBox(posBox, posPlayer) ) {
@@ -256,10 +272,27 @@ Crafty.c('PlayerCharacter', {
                 } else {
                     return false;
                 }
+            /*case 'n':
+
+                console.log(this.isAtBottomBox(posBox, posPlayer));
+                return this.isAtBottomBox(posBox, posPlayer);
+
+            case 's':
+                return this.isAtTopBox(posBox, posPlayer);*/
         }
 
-        return true;
 
+        return true;
+    },
+
+
+    isAtTopBox : function (poxBox, posPlayer) {
+        return ( posPlayer['_y'] <  posBox['_y']);
+    },
+
+    isAtBottomBox : function (poxBox, posPlayer)
+    {
+        return ( posPlayer['_y'] >  posBox['_y']);
     },
 
     isAtRightBox : function (posBox, posPlayer) {

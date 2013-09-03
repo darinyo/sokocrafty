@@ -1,0 +1,14 @@
+#scoreboard {
+    opacity: 0.4;
+    background-color: red;
+    height: 20px;
+
+}
+
+#scoreboard div{
+    font-family: "Century Gothic";
+    color: white;
+    font-weight: bold;
+    float: left;
+    width: 25%;
+}

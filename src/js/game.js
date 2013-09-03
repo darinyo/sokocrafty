@@ -58,8 +58,12 @@ Game = {
     // Initialize and start our game
     start: function() {
         // Start crafty and set a background color so that we can see it's working
-        Crafty.init(Game.width(), Game.height());
-        Crafty.background('url("assets/Blue.png")');
+        Crafty.init(Game.width(), Game.height(), 'game');
+
+        //Add Canvas Element
+        Crafty.canvas.init();
+        //Set canvas under interface
+        Crafty.canvas._canvas.style.zIndex = '0';
 
         // Simply start the "Game" scene to get things going
         Crafty.scene('Loading');
