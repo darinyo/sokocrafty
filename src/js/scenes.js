@@ -6,7 +6,26 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Crafty.scene('Game', function() {
+Crafty.scene('Level', function() {
+
+    //MAPA INICIAL
+    var map = new Array();
+    map[0]  = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    map[1]  = new Array(0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0);
+    map[2]  = new Array(0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0);
+    map[3]  = new Array(0,0,0,0,0,1,3,0,0,1,1,0,0,0,0,0,0,0,0,0,0);
+    map[4]  = new Array(0,0,0,1,1,1,0,0,3,0,1,0,0,0,0,0,0,0,0,0,0);
+    map[5]  = new Array(0,0,0,1,0,0,3,0,3,0,1,0,0,0,0,0,0,0,0,0,0);
+    map[6]  = new Array(0,1,1,1,0,1,0,1,1,0,1,0,0,0,1,1,1,1,1,1,0);
+    map[7]  = new Array(0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,0,0,2,2,1,0);
+    map[8]  = new Array(0,1,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,2,2,1,0);
+    map[9]  = new Array(0,1,1,1,1,1,0,1,1,1,0,1,0,1,1,0,0,2,2,1,0);
+    map[10] = new Array(0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0);
+    map[11] = new Array(0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0);
+    map[12] = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    map['boxes'] = 6;
+    map['time'] = 90;
+    map['level'] = 1;
 
     Crafty.background('url("assets/Blue.png")');
     // Pintamos el mapa
@@ -28,6 +47,13 @@ Crafty.scene('Game', function() {
                 Crafty.e(element).at(j, i);
             }
         }
+
+        $('#lives').html('0'+LIVES);
+        $('#boxsOnFinish').html(1);
+        $('#total_boxs').html(map['boxes']);
+        $('#time').html(map['time']);
+        $('#level').html('0'+map['level']);
+
     }
 
     // Situamos al jugador
@@ -40,13 +66,17 @@ Crafty.scene('Game', function() {
 // Handles the loading of binary assets such as images and audio files
 Crafty.scene('Loading', function(){
 
-    Crafty.background('url("assets/loading.gif")');
+    // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-//    Crafty.e('2D, DOM, Text')
-//        .text('Loading...')
-//        .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
-//        .css($text_css);
+    Crafty.background('url("assets/Blue.png")');
+    Crafty.e('2D, DOM, Text')
+        .text('Loading...')
+        .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+        .textFont({ size: '24px', family: 'Faster One' })
+        .textColor('#adadad')
+        .css(text_css)
+        .unselectable();
 
 
 
@@ -90,6 +120,6 @@ Crafty.scene('Loading', function(){
 
 
         // Now that our sprites are ready to draw, start the game
-        setTimeout("Crafty.scene('Game')",2000);
+        setTimeout("Crafty.scene('Level')",2000);
     })
 });

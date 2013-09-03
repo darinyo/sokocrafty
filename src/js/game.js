@@ -13,24 +13,9 @@ var PLAYER_RIGHT    = 8;
 
 var MARGIN          = 0;
 
-//MAPA INICIAL
-var map = new Array();
-map[0]  = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-map[1]  = new Array(0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0);
-map[2]  = new Array(0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0);
-map[3]  = new Array(0,0,0,0,0,1,3,0,0,1,1,0,0,0,0,0,0,0,0,0,0);
-map[4]  = new Array(0,0,0,1,1,1,0,0,3,0,1,0,0,0,0,0,0,0,0,0,0);
-map[5]  = new Array(0,0,0,1,0,0,3,0,3,0,1,0,0,0,0,0,0,0,0,0,0);
-map[6]  = new Array(0,1,1,1,0,1,0,1,1,0,1,0,0,0,1,1,1,1,1,1,0);
-map[7]  = new Array(0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,0,0,2,2,1,0);
-map[8]  = new Array(0,1,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,2,2,1,0);
-map[9]  = new Array(0,1,1,1,1,1,0,1,1,1,0,1,0,1,1,0,0,2,2,1,0);
-map[10] = new Array(0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0);
-map[11] = new Array(0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0);
-map[12] = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+var LIVES           = 3;
 
-var $text_css = { 'font-size': '24px', 'font-family': 'Arial', 'color': 'white', 'text-align': 'center' }
-
+var text_css = { 'text-align': 'center' }
 
 Game = {
     map_grid: {
@@ -41,6 +26,7 @@ Game = {
           height: 32  // 32
         }
     },
+
 
 
     // The total width of the game screen. Since our grid takes up the entire screen
