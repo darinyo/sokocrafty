@@ -49,7 +49,7 @@ Crafty.scene('Level', function() {
         }
 
         $('#lives').html('0'+LIVES);
-        $('#boxsOnFinish').html(1);
+        $('#boxsOnFinish').html(0);
         $('#total_boxs').html(map['boxes']);
         $('#time').html(map['time']);
         $('#level').html('0'+map['level']);
@@ -70,7 +70,7 @@ Crafty.scene('Loading', function(){
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
     Crafty.background('url("assets/Blue.png")');
-    Crafty.e('2D, DOM, Text')
+    Crafty.e('2D, DOM, Text, Tween')
         .text('Loading...')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
         .textFont({ size: '24px', family: 'Faster One' })

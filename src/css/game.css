@@ -1,10 +1,9 @@
 #scoreboard {
-    opacity: 0.5;
-    background: none #909090;
+    opacity: 0.8;
+    background: url('../../assets/bg-scoreboard.png') no-repeat;
     height: 20px;
     border-radius: 20px;
     margin-top:3px;
-    padding-left:15px;
 }
 
 #scoreboard div {
@@ -14,4 +13,5 @@
     font-weight: 400;
     float: left;
     width: 24%;
+    text-align: center;
 }
