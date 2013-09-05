@@ -9,6 +9,9 @@
 
 //MAPA INICIAL
 
+
+
+
 var levels = new Array();
 
 var map = new Array();
@@ -47,6 +50,6 @@ map[11] = new Array(0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0);
 map[12] = new Array(0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0);
 map['boxes'] = 6;
 map['time'] = 95;
-map['level'] = 1;
+map['level'] = 2;
 
 levels[2] = map;

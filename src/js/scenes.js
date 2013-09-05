@@ -6,10 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
+var text_css = { 'text-align': 'center', 'border': '1px solid red' }
+
 Crafty.scene('Level', function() {
 
     Crafty.background('url("assets/Blue.png")');
-    Crafty.audio.play("bgMusic", -1);
+    $('#scoreboard').show();
+
 
     var current_level = levels[CURRENT_LEVEL];
     // Pintamos el mapa
@@ -61,6 +64,20 @@ Crafty.scene('Level', function() {
     Crafty.e('PlayerCharacter').at(12, 9);
 });
 
+Crafty.scene('Menu', function(){
+    Crafty.audio.play("bgMusic", -1);
+
+    $('#scoreboard').hide();
+
+    Crafty.background('url("assets/Blue.png")');
+    Crafty.e('2D, DOM, Mouse, btn_play')
+        .attr({ x:250 , y: 200, w: 200, h: 60 })
+        .bind('Click', function() {alert('hola');})
+
+
+});
+
+
 
 // Loading scene
 // -------------
@@ -86,7 +103,8 @@ Crafty.scene('Loading', function(){
         'assets/Bstore2.png',
         'assets/spr_player_128.png',
         'assets/box.png',
-        'assets/box_finish.png'
+        'assets/box_finish.png',
+        'assets/play-button.gif'
         ], function(){
         // Once the image is loaded...
 
@@ -101,6 +119,10 @@ Crafty.scene('Loading', function(){
 
         Crafty.sprite(32, 32, 'assets/Bstore2.png', {
           spr_store:    [0, 0]
+        });
+
+        Crafty.sprite(200, 60, 'assets/play-button.gif', {
+            btn_play:    [0, 0]
         });
 
         // Define the PC's sprite to be the first sprite in the third row of the
@@ -121,7 +143,7 @@ Crafty.scene('Loading', function(){
 
 
         // Now that our sprites are ready to draw, start the game
-        setTimeout("Crafty.scene('Level')",2000);
+        setTimeout("Crafty.scene('Menu')",0);
     })
 });
 

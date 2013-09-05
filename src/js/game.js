@@ -16,7 +16,6 @@ var LIVES           = 3;
 var CURRENT_LEVEL   = 1;
 var level_timer;
 
-var text_css = { 'text-align': 'center' }
 
 Game = {
     map_grid: {
