@@ -9,6 +9,8 @@
 Crafty.scene('Level', function() {
 
     Crafty.background('url("assets/Blue.png")');
+    Crafty.audio.play("bgMusic", -1);
+
     var current_level = levels[CURRENT_LEVEL];
     // Pintamos el mapa
     for( var i=12; i>=0; i--){
@@ -114,6 +116,8 @@ Crafty.scene('Loading', function(){
         Crafty.sprite(32, 'assets/box_finish.png', {
             spr_box_finish:  [0, 0]
         });
+
+        Crafty.audio.add("bgMusic", "assets/sounds/bg-music.mp3");
 
 
         // Now that our sprites are ready to draw, start the game
