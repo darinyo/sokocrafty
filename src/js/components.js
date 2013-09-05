@@ -103,7 +103,9 @@ Crafty.c('Box', {
         box._onFinish = isOnFinish;
 
         if(this.checkLevelFinished()) {
-            Crafty.scene('Loading');
+            CURRENT_LEVEL++;
+            window.clearInterval(timer);
+            Crafty.scene('Level complete');
         }
     },
 

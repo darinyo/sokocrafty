@@ -5,15 +5,11 @@ var EMPTY           = 0;
 var WALL            = 1;
 var FINISH          = 2;
 var BOX             = 3;
-var BOX_FINISH      = 4;
-var PLAYER_UP       = 5;
-var PLAYER_DOWN     = 6;
-var PLAYER_LEFT     = 7;
-var PLAYER_RIGHT    = 8;
 
 var MARGIN          = 0;
 
 var LIVES           = 3;
+var CURRENT_LEVEL   = 1;
 
 var text_css = { 'text-align': 'center' }
 
