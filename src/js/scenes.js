@@ -33,19 +33,19 @@ Crafty.scene('Level', function() {
 
     $('#lives').html('0'+LIVES);
     $('#boxsOnFinish').html(0);
-    $('#total_boxs').html(map['boxes']);
-    $('#time').html(map['time']);
-    $('#level').html('0'+map['level']);
+    $('#total_boxs').html(current_level['boxes']);
+    $('#time').html(current_level['time']);
+    $('#level').html('0'+current_level['level']);
 
-    var seconds = map['time'];
+    var seconds = current_level['time'];
 
-    var timer = window.setInterval(function(){
+    level_timer = window.setInterval(function(){
         seconds --;
         $('#time').html(seconds);
         if (seconds == 0) {
             LIVES--;
             $('#lives').html('0'+LIVES);
-            window.clearInterval(timer);
+            window.clearInterval(level_timer);
             if (LIVES == 0) {
                 Crafty.scene('Game Over');
             } else {
@@ -164,7 +164,7 @@ Crafty.scene('Level complete', function(){
     //  takes a noticeable amount of time to load
     Crafty.background('url("assets/Blue.png")');
     Crafty.e('2D, DOM, Text')
-        .text('Level complete!!')
+        .text('Level completed!!')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
         .textFont({ size: '24px', family: 'Faster One' })
         .textColor('#adadad')

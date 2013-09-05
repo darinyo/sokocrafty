@@ -9,7 +9,12 @@ var BOX             = 3;
 var MARGIN          = 0;
 
 var LIVES           = 3;
+
+/**
+ * Contador del tiempo de juego
+ */
 var CURRENT_LEVEL   = 1;
+var level_timer;
 
 var text_css = { 'text-align': 'center' }
 

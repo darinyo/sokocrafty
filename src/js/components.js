@@ -104,7 +104,7 @@ Crafty.c('Box', {
 
         if(this.checkLevelFinished()) {
             CURRENT_LEVEL++;
-            window.clearInterval(timer);
+            window.clearInterval(level_timer);
             Crafty.scene('Level complete');
         }
     },
@@ -151,7 +151,6 @@ Crafty.c('Box', {
     stopByBox: function() {
 
         if (this.getDirection()) {
-            console.log(this);
             this.moveBox(this.getDirection(),-MOVEMENT_UNITS);
             this.setDirection(null);
 
