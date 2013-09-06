@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var text_css = { 'text-align': 'center', 'border': '1px solid red' }
+var text_css = { 'text-align': 'center' }
 
 Crafty.scene('Level', function() {
 
@@ -70,10 +70,50 @@ Crafty.scene('Menu', function(){
     $('#scoreboard').hide();
 
     Crafty.background('url("assets/Blue.png")');
-    Crafty.e('2D, DOM, Mouse, btn_play')
-        .attr({ x:250 , y: 200, w: 200, h: 60 })
-        .bind('Click', function() {alert('hola');})
+    Crafty.e('2D, DOM, Mouse, Text')
+        .text('Play')
+        .attr({ x:250 , y: 100, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'Faster One' })
+        .textColor('#adadad')
+        .css(text_css)
+        .unselectable()
+        .bind('Click', function() {
+            Crafty.scene('Level');
+        });
 
+    Crafty.e('2D, DOM, Mouse, Text')
+        .text('Select Level')
+        .attr({ x:250 , y: 150, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'Faster One' })
+        .textColor('#adadad')
+        .css(text_css)
+        .unselectable()
+        .bind('Click', function() {
+            Crafty.scene('Level');
+        });
+
+
+    Crafty.e('2D, DOM, Mouse, Text')
+        .text('Options')
+        .attr({ x:250 , y: 200, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'Faster One' })
+        .textColor('#adadad')
+        .css(text_css)
+        .unselectable()
+        .bind('Click', function() {
+            Crafty.scene('Level');
+        });
+
+    Crafty.e('2D, DOM, Mouse, Text')
+        .text('Help')
+        .attr({ x:250 , y: 250, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'Faster One' })
+        .textColor('#adadad')
+        .css(text_css)
+        .unselectable()
+        .bind('Click', function() {
+            Crafty.scene('Level');
+        });
 
 });
 
