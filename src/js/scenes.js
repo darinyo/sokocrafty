@@ -123,15 +123,35 @@ Crafty.scene('Select Level', function(){
 
     Crafty.background('url("assets/Blue.png")');
 
-    for (var i=1; i<=TOTAL_LEVELS; i++) {
-        var y_pos = 50 + i*50;
+    for (var i=0; i<TOTAL_LEVELS; i++) {
+        var x_col = i%3;
+        var y_row = Math.floor(i/3);
+        var y_pos = 100 + y_row*175;
+        var x_pos = 50 + x_col*200;
+
+
+
+
+        console.log('level: ' + i + ' - x_col: ' + x_col + ' - y_row: ' + y_row + ' - x_pos: ' + x_pos + ' - y_pos: ' + y_pos );
+
+//        Crafty.viewport.mouselook(true);
+
         Crafty.e('2D, DOM, Mouse, Text')
-            .text('Level ' + i)
-            .attr({ x:250 , y: y_pos, w: 200, h: 60, level: i})
+            .text('Level ' + ((i*1)+1))
+            .attr({ x:x_pos , y: y_pos, w: 200, h: 60, level: i+1})
             .textFont({ size: '24px', family: 'Faster One' })
             .textColor('#adadad')
             .css(text_css)
             .unselectable()
+            .bind('Click', function() {
+                CURRENT_LEVEL = this.attr('level');
+                Crafty.scene('Level');
+            });
+
+
+        Crafty.e('2D, DOM, Mouse, Image')
+            .attr({ x:x_pos + 20 , y: y_pos + 50, w: 100, h: 58, level: i+1})
+            .image("assets/images/level1_2.png")
             .bind('Click', function() {
                 CURRENT_LEVEL = this.attr('level');
                 Crafty.scene('Level');
