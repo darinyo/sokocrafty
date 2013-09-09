@@ -1,3 +1,5 @@
+@font-face { font-family: font-menu; src: url('../../assets/fonts/font-menu.ttf') format('truetype'); }
+
 #scoreboard {
     opacity: 0.8;
     background: url('../../assets/bg-scoreboard.png') no-repeat;
@@ -14,4 +16,9 @@
     float: left;
     width: 24%;
     text-align: center;
+}
+
+.menu {
+    font-family: font-menu;
+    font-size: 24px;
 }
