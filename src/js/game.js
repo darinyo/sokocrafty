@@ -13,6 +13,7 @@ var LIVES           = 3;
 /**
  * Contador del tiempo de juego
  */
+var TOTAL_LEVELS    = 2;
 var CURRENT_LEVEL   = 1;
 var level_timer;
 

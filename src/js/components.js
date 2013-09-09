@@ -105,7 +105,7 @@ Crafty.c('Box', {
         if(this.checkLevelFinished()) {
             CURRENT_LEVEL++;
             window.clearInterval(level_timer);
-            Crafty.scene('Level complete');
+            Crafty.scene('Level completed');
         }
     },
 

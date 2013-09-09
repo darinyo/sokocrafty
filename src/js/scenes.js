@@ -73,7 +73,7 @@ Crafty.scene('Menu', function(){
     Crafty.e('2D, DOM, Mouse, Text')
         .text('Play')
         .attr({ x:250 , y: 100, w: 200, h: 60 })
-        .textFont({ size: '32px', family: 'font-menu' })
+        .textFont({ size: '36px', family: 'font-menu' })
         .textColor('#adadad')
         .css(text_css)
         .unselectable()
@@ -83,37 +83,61 @@ Crafty.scene('Menu', function(){
 
     Crafty.e('2D, DOM, Mouse, Text')
         .text('Levels')
-        .attr({ x:250 , y: 150, w: 200, h: 60 })
-        .textFont({ size: '32px', family: 'font-menu' })
+        .attr({ x:250 , y: 170, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#adadad')
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
-            Crafty.scene('Level');
+            Crafty.scene('Select Level');
         });
 
 
     Crafty.e('2D, DOM, Mouse, Text')
         .text('Options')
-        .attr({ x:250 , y: 200, w: 200, h: 60 })
-        .textFont({ size: '32px', family: 'font-menu' })
+        .attr({ x:250 , y: 220, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#adadad')
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
-            Crafty.scene('Level');
+            Crafty.scene('Options');
         });
 
     Crafty.e('2D, DOM, Mouse, Text')
-        .text('Help')
-        .attr({ x:250 , y: 250, w: 200, h: 60 })
-        .textFont({ size: '32px', family: 'font-menu' })
+        .text('About')
+        .attr({ x:250 , y: 270, w: 200, h: 60 })
+        .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#adadad')
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
-            Crafty.scene('Level');
+            Crafty.scene('About');
         });
+
+});
+
+
+Crafty.scene('Select Level', function(){
+    Crafty.audio.play("bgMusic", -1);
+
+    Crafty.background('url("assets/Blue.png")');
+
+    for (var i=1; i<=TOTAL_LEVELS; i++) {
+        var y_pos = 50 + i*50;
+        Crafty.e('2D, DOM, Mouse, Text')
+            .text('Level ' + i)
+            .attr({ x:250 , y: y_pos, w: 200, h: 60, level: i})
+            .textFont({ size: '24px', family: 'Faster One' })
+            .textColor('#adadad')
+            .css(text_css)
+            .unselectable()
+            .bind('Click', function() {
+                CURRENT_LEVEL = this.attr('level');
+                Crafty.scene('Level');
+            });
+    }
+
 
 });
 
@@ -223,7 +247,7 @@ Crafty.scene('Game Over', function(){
 });
 
 
-Crafty.scene('Level complete', function(){
+Crafty.scene('Level completed', function(){
 
     // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
