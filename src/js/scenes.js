@@ -10,7 +10,7 @@ var text_css = { 'text-align': 'center' }
 
 Crafty.scene('Level', function() {
 
-    Crafty.background('url("assets/Blue.png")');
+//    Crafty.background('url("assets/images/bg1.jpg")');
     $('#scoreboard').show();
 
 
@@ -65,14 +65,11 @@ Crafty.scene('Level', function() {
 });
 
 Crafty.scene('Menu', function(){
-    Crafty.audio.play("bgMusic", -1);
+//    Crafty.audio.play("bgMusic", -1);
 
     $('#scoreboard').hide();
 
     var player = Crafty.e('PlayerCharacterMenu').at(-1,-1);
-
-
-    Crafty.background('url("assets/Blue.png")');
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Play')
         .attr({ x:250 , y: 100, w: 200, h: 60 })
@@ -189,27 +186,28 @@ Crafty.scene('Menu', function(){
 });
 
 
-Crafty.scene('Select Level', function(){
-    Crafty.audio.play("bgMusic", -1);
-
-    Crafty.background('url("assets/Blue.png")');
+Crafty.scene('Select Level', function() {
 
     for (var i=0; i<TOTAL_LEVELS; i++) {
         var x_col = i%3;
         var y_row = Math.floor(i/3);
-        var y_pos = 100 + y_row*175;
-        var x_pos = 50 + x_col*200;
+        var y_pos = 100 + y_row*160;
+        var x_pos = 30 + x_col*200;
 
-
-
-
-        console.log('level: ' + i + ' - x_col: ' + x_col + ' - y_row: ' + y_row + ' - x_pos: ' + x_pos + ' - y_pos: ' + y_pos );
 
 //        Crafty.viewport.mouselook(true);
 
+        Crafty.e('2D, DOM, Text')
+            .text('Select Level')
+            .attr({ x:140 , y: 30, w: 400, h: 30})
+            .textFont({ size: '32px', family: 'font-menu' })
+            .textColor('#adadad')
+            .css(text_css)
+            .unselectable()
+
         Crafty.e('2D, DOM, Mouse, Text')
             .text('Level ' + ((i*1)+1))
-            .attr({ x:x_pos , y: y_pos, w: 200, h: 60, level: i+1})
+            .attr({ x:x_pos , y: y_pos, w: 200, h: 25, level: i+1})
             .textFont({ size: '24px', family: 'Faster One' })
             .textColor('#adadad')
             .css(text_css)
@@ -221,13 +219,29 @@ Crafty.scene('Select Level', function(){
 
 
         Crafty.e('2D, DOM, Mouse, Image')
-            .attr({ x:x_pos + 20 , y: y_pos + 50, w: 100, h: 58, level: i+1})
-            .image("assets/images/level1_2.png")
+            .attr({ x:x_pos + 30 , y: y_pos + 30, w: 100, h: 58, level: i+1})
+            .image("assets/images/level1.png")
             .bind('Click', function() {
                 CURRENT_LEVEL = this.attr('level');
                 Crafty.scene('Level');
             });
     }
+
+    Crafty.e('2D, DOM, Mouse, Image')
+        .attr({ x:600 , y: 50, w: 50, h: 50})
+        .image("assets/images/FlechaUp.png")
+        .bind('Click', function() {
+            Crafty.viewport.pan('y', -25, 60);
+        });
+
+    Crafty.e('2D, DOM, Mouse, Image')
+        .attr({ x:600 , y: 350, w: 50, h: 50})
+        .image("assets/images/FlechaDown.png")
+        .bind('Click', function() {
+            Crafty.viewport.pan('y', 50, 30);
+            var current_y = this.attr('y');
+            this.attr('y', current_y+50);
+        });
 
 
 });
@@ -239,10 +253,11 @@ Crafty.scene('Select Level', function(){
 // Handles the loading of binary assets such as images and audio files
 Crafty.scene('Loading', function(){
 
-    // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.background('url("assets/Blue.png")');
+    Crafty.background('url("assets/images/bg2.jpg")');
+
+
     Crafty.e('2D, DOM, Text')
         .text('Loading...')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
@@ -307,7 +322,6 @@ Crafty.scene('Time Over', function(){
     // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.background('url("assets/Blue.png")');
     Crafty.e('2D, DOM, Text')
         .text('Time Over!! Try Again')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
@@ -326,7 +340,6 @@ Crafty.scene('Game Over', function(){
     // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.background('url("assets/Blue.png")');
     Crafty.e('2D, DOM, Text')
         .text('Game Over!!')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
@@ -343,7 +356,6 @@ Crafty.scene('Level completed', function(){
     // Crafty.background('url("assets/loading.gif")');
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.background('url("assets/Blue.png")');
     Crafty.e('2D, DOM, Text')
         .text('Level completed!!')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
