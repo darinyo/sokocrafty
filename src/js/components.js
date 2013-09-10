@@ -193,10 +193,24 @@ Crafty.c('StoreBox', {
     }
 });
 
+Crafty.c('PlayerCharacterMenu', {
+    init: function() {
+        this.requires('Actor, spr_player, Collision, SpriteAnimation, Tween')
+            .animate('PlayerMovingUp',    0, 2, 2)
+            .animate('PlayerMovingRight', 0, 3, 2)
+            .animate('PlayerMovingDown',  0, 0, 2)
+            .animate('PlayerMovingLeft',  0, 1, 2);
+        this.attr({
+            w: 24,
+            h: 24
+        })
+    },
+});
+
 // This is the player-controlled character
 Crafty.c('PlayerCharacter', {
     init: function() {
-        this.requires('Actor, Fourway, Color, spr_player,Collision, SpriteAnimation')
+        this.requires('Actor, Fourway, Color, spr_player, Collision, SpriteAnimation')
             .fourway(MOVEMENT_UNITS)
             .stopOnWall()
             .moveBoxs()
