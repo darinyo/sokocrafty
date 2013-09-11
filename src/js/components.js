@@ -204,7 +204,7 @@ Crafty.c('PlayerCharacterMenu', {
             w: 24,
             h: 24
         })
-    },
+    }
 });
 
 // This is the player-controlled character

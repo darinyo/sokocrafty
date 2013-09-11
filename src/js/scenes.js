@@ -195,7 +195,7 @@ Crafty.scene('Select Level', function() {
         var x_pos = 30 + x_col*200;
 
 
-//        Crafty.viewport.mouselook(true);
+        Crafty.viewport.mouselook(true);
 
         Crafty.e('2D, DOM, Text')
             .text('Select Level')
@@ -220,28 +220,36 @@ Crafty.scene('Select Level', function() {
 
         Crafty.e('2D, DOM, Mouse, Image')
             .attr({ x:x_pos + 30 , y: y_pos + 30, w: 100, h: 58, level: i+1})
-            .image("assets/images/level1.png")
+            .image("assets/images/level"+(i+1)+".png")
             .bind('Click', function() {
                 CURRENT_LEVEL = this.attr('level');
                 Crafty.scene('Level');
             });
     }
 
-    Crafty.e('2D, DOM, Mouse, Image')
-        .attr({ x:600 , y: 50, w: 50, h: 50})
+    Crafty.e('2D, DOM, Mouse, Image, Tween, Arrow')
+        .attr({ x:600 , y: 10, w: 50, h: 50})
         .image("assets/images/FlechaUp.png")
         .bind('Click', function() {
-            Crafty.viewport.pan('y', -25, 60);
+            moveViewport('y', -50, 30)
         });
 
-    Crafty.e('2D, DOM, Mouse, Image')
-        .attr({ x:600 , y: 350, w: 50, h: 50})
+    Crafty.e('2D, DOM, Mouse, Image, Tween, Arrow')
+        .attr({ x:600 , y: 370, w: 50, h: 50})
         .image("assets/images/FlechaDown.png")
+
         .bind('Click', function() {
-            Crafty.viewport.pan('y', 50, 30);
-            var current_y = this.attr('y');
-            this.attr('y', current_y+50);
+            moveViewport('y', 50, 30)
         });
+
+    function moveViewport(axis, pixels, frames){
+        Crafty.viewport.pan(axis, pixels, frames);
+        Crafty('Arrow').each(function() {
+             var current_y = this.attr('y');
+            var current_x = this.attr('x');
+            this.tween({x: current_x, y:current_y+pixels},30);
+        });
+    }
 
 
 });
