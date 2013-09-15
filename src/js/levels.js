@@ -31,7 +31,10 @@ map[12] = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 map['boxes'] = 6;
 map['time'] = 90;
 map['level'] = 1;
-
+map['width'] = 22;
+map['height'] = 13;
+map['name'] = '';
+map['player'] = new Array(12,9);
 levels[1] = map;
 
 var map = new Array();
@@ -51,5 +54,9 @@ map[12] = new Array(0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0);
 map['boxes'] = 6;
 map['time'] = 95;
 map['level'] = 2;
-
+map['width'] = 22;
+map['height'] = 13;
+map['name'] = '';
+map['player'] = new Array(12,9);
 levels[2] = map;
+

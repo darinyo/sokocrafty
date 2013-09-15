@@ -16,8 +16,10 @@ Crafty.scene('Level', function() {
 
     var current_level = levels[CURRENT_LEVEL];
     // Pintamos el mapa
-    for( var i=12; i>=0; i--){
-        for( var j=21; j > 0; j--){
+
+
+    for( var i=current_level['height']-1; i>=0; i--){
+        for( var j=current_level['width']-1; j>0; j--){
             var element = '';
             switch (current_level[i][j]) {
                 case WALL:
@@ -35,6 +37,8 @@ Crafty.scene('Level', function() {
             }
         }
     }
+
+
 
     $('#lives').html('0'+LIVES);
     $('#boxsOnFinish').html(0);
@@ -60,8 +64,10 @@ Crafty.scene('Level', function() {
     },1000);
 
 
+
+
     // Situamos al jugador
-    Crafty.e('PlayerCharacter').at(12, 9);
+    Crafty.e('PlayerCharacter').at(current_level['player'][0], current_level['player'][1]);
 });
 
 Crafty.scene('Menu', function(){

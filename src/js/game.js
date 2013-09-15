@@ -13,7 +13,7 @@ var LIVES           = 3;
 /**
  * Contador del tiempo de juego
  */
-var TOTAL_LEVELS    = 8;
+var TOTAL_LEVELS    = 100;
 var CURRENT_LEVEL   = 1;
 var level_timer;
 
@@ -33,7 +33,7 @@ Game = {
     // The total width of the game screen. Since our grid takes up the entire screen
     //  this is just the width of a tile times the width of the grid
     width: function() {
-        return this.map_grid.width * this.map_grid.tile.width;
+         return this.map_grid.width * this.map_grid.tile.width;
     },
 
     // The total height of the game screen. Since our grid takes up the entire screen
@@ -51,6 +51,9 @@ Game = {
         Crafty.canvas.init();
         //Set canvas under interface
         Crafty.canvas._canvas.style.zIndex = '0';
+
+        Crafty.viewport.centerOn('PlayerCharacter');
+        Crafty.viewport.follow('')
 
         // Simply start the "Game" scene to get things going
         Crafty.scene('Loading');
