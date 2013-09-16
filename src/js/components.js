@@ -104,7 +104,9 @@ Crafty.c('Box', {
 
         if(this.checkLevelFinished()) {
             CURRENT_LEVEL++;
-            localStorage.levels_completed = CURRENT_LEVEL;
+            if (CURRENT_LEVEL > localStorage.levels_completed) {
+                localStorage.levels_completed = CURRENT_LEVEL;
+            }
             window.clearInterval(level_timer);
             Crafty.scene('Level completed');
         }
