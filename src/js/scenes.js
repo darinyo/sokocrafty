@@ -194,6 +194,23 @@ Crafty.scene('Menu', function(){
 
 Crafty.scene('Select Level', function() {
 
+    if(typeof(Storage)!=="undefined") {
+        var levels_completed = localStorage.levels_completed;
+        if (!levels_completed) {
+            levels_completed = 1;
+        }
+    }
+
+    var loadLevel = function() {
+        CURRENT_LEVEL = this.attr('level');
+        Crafty.scene('Level');
+    };
+
+    var levelBlocked = function() {
+        console.log('Sorry, level blocked');
+    }
+
+
     for (var i=0; i<TOTAL_LEVELS; i++) {
         var x_col = i%3;
         var y_row = Math.floor(i/3);
@@ -223,14 +240,21 @@ Crafty.scene('Select Level', function() {
                 Crafty.scene('Level');
             });
 
+        if ( i==0 || levels_completed > i) {
+            var image = "assets/images/level"+(i+1)+".png";
+            var attr = { x:x_pos + 30 , y: y_pos + 30, w: 100, h: 58, level: i+1};
+            var onclick = loadLevel;
+
+        } else {
+            var image = "assets/images/candado.png";
+            var attr = { x:x_pos + 75 , y: y_pos + 30, w: 100, h: 58, level: i+1};
+            var onclick = levelBlocked;
+        }
 
         Crafty.e('2D, DOM, Mouse, Image')
-            .attr({ x:x_pos + 30 , y: y_pos + 30, w: 100, h: 58, level: i+1})
-            .image("assets/images/level"+(i+1)+".png")
-            .bind('Click', function() {
-                CURRENT_LEVEL = this.attr('level');
-                Crafty.scene('Level');
-            });
+            .attr(attr)
+            .image(image)
+            .bind('Click', onclick);
     }
 
     Crafty.e('2D, DOM, Mouse, Image, Tween, Arrow')
