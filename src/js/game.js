@@ -14,14 +14,14 @@ var LIVES           = 3;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 1;
+var CURRENT_LEVEL   = 14;
 var level_timer;
 
 
 Game = {
     map_grid: {
-        width:  21,
-        height: 13,
+        width:  35,
+        height: 35,
         tile: {
           width:  32, // 48
           height: 32  // 32
@@ -33,13 +33,17 @@ Game = {
     // The total width of the game screen. Since our grid takes up the entire screen
     //  this is just the width of a tile times the width of the grid
     width: function() {
-         return this.map_grid.width * this.map_grid.tile.width;
+         // return this.map_grid.width * this.map_grid.tile.width;
+
+        return 640;
     },
 
     // The total height of the game screen. Since our grid takes up the entire screen
     //  this is just the height of a tile times the height of the grid
     height: function() {
-        return this.map_grid.height * this.map_grid.tile.height;
+        // return this.map_grid.height * this.map_grid.tile.height;
+
+        return 480;
     },
 
     // Initialize and start our game

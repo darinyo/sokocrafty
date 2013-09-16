@@ -8,17 +8,21 @@ class ConvertSLCToJs
     const EXTENSION_LEVEL_XML = '.slc';
     const EXTENSION_JS = '.js';
 
-    const SLC_CHAR_PLAYER_MAP   = "@";
-    const SLC_CHAR_WALL_MAP     = "#";
-    const SLC_CHAR_EMPTY_MAP    = " ";
-    const SLC_CHAR_BOX_MAP      = "$";
-    const SLC_CHAR_MARK_MAP     = ".";
-    const SLC_CHAR_BOX_MARK_MAP = "*";
+    const SLC_CHAR_PLAYER_MAP       = "@";
+    const SLC_CHAR_PLAYER_MARK_MAP  = "+";
+    const SLC_CHAR_WALL_MAP         = "#";
+    const SLC_CHAR_EMPTY_MAP        = " ";
+    const SLC_CHAR_BOX_MAP          = "$";
+    const SLC_CHAR_MARK_MAP         = ".";
+    const SLC_CHAR_BOX_MARK_MAP     = "*";
 
-    const JS_CHAR_WALL_MAP      = 1;
-    const JS_CHAR_EMPTY_MAP     = 0;
-    const JS_CHAR_BOX_MAP       = 3;
-    const JS_CHAR_MARK_MAP      = 2;
+
+    const JS_CHAR_WALL_MAP          = 1;
+    const JS_CHAR_EMPTY_MAP         = 0;
+    const JS_CHAR_BOX_MAP           = 3;
+    const JS_CHAR_MARK_MAP          = 2;
+    const JS_CHAR_BOX_MARK_MAP      = 4;
+
 
     private function initParams()
     {
@@ -73,7 +77,7 @@ class ConvertSLCToJs
     {
         $nameLevel = $xmlLevel->attributes()->Id;
         $widthLevel = $xmlLevel->attributes()->Width;
-        $heightLevel = $xmlLevel->attributes()->Height;
+        $heightLevel = $xmlLevel->attributes()->Height + 1;
 
         $strMap = "var map = new Array();\n";
         $strMap .= "map['width'] = ".$widthLevel.";\n";
@@ -81,10 +85,14 @@ class ConvertSLCToJs
         $strMap .= "map['name'] = '".$nameLevel."';\n";
         $strMap .= "map['level'] = ".$numLevel.";\n";
 
+
         $numBox=0;
         $nLineaMap=0;
         $playerPosW=0;
         $playerPosH=0;
+
+        $strMap .= $this->generateLineLevel("", $nLineaMap, $widthLevel);
+        $nLineaMap++;
 
         foreach($xmlLevel->L as $lineLevel) {
             $numBox += $this->getNumBoxesByLineLevel($lineLevel);
@@ -108,7 +116,18 @@ class ConvertSLCToJs
 
     private function getPosWPlayerInLine($lineLevel)
     {
-        return strpos($lineLevel, self::SLC_CHAR_PLAYER_MAP);
+        $pos1 = strpos($lineLevel, self::SLC_CHAR_PLAYER_MAP);
+        if ($pos1 !== false) {
+            return $pos1;
+        } else {
+            $pos2 = strpos($lineLevel, self::SLC_CHAR_PLAYER_MARK_MAP);
+            if ($pos2 !== false) {
+                return $pos2;
+            }
+        }
+
+        return false;
+
     }
 
     private function getNormalizedLineLevel($lineLevel, $widthLevel)
@@ -135,12 +154,15 @@ class ConvertSLCToJs
                 case self::SLC_CHAR_WALL_MAP:
                     $strLineMap .= "1";
                     break;
+                case self::SLC_CHAR_MARK_MAP:
+                case self::SLC_CHAR_PLAYER_MARK_MAP:
+                    $strLineMap .= "2";
+                    break;
                 case self::SLC_CHAR_BOX_MAP:
-                case self::SLC_CHAR_BOX_MARK_MAP:
                     $strLineMap .= "3";
                     break;
-                case self::SLC_CHAR_MARK_MAP:
-                    $strLineMap .= "2";
+                case self::SLC_CHAR_BOX_MARK_MAP:
+                    $strLineMap .= "4";
                     break;
                 default:
                     $strLineMap .= "0";
