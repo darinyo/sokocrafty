@@ -19,7 +19,7 @@ Crafty.scene('Level', function() {
 
 
     for( var i=current_level['height']-1; i>=0; i--){
-        for( var j=current_level['width']-1; j>0; j--){
+        for( var j=current_level['width']-1; j>=0; j--){
             var element = '';
             switch (current_level[i][j]) {
                 case WALL:
@@ -64,10 +64,11 @@ Crafty.scene('Level', function() {
     },1000);
 
 
-
-
     // Situamos al jugador
-    Crafty.e('PlayerCharacter').at(current_level['player'][0], current_level['player'][1]);
+    var player = Crafty.e('PlayerCharacter');
+    player.at(current_level['player'][0], current_level['player'][1]);
+    Crafty.viewport.centerOn(player);
+    Crafty.viewport.follow(player);
 });
 
 Crafty.scene('Menu', function(){
@@ -100,6 +101,9 @@ Crafty.scene('Menu', function(){
             this.textColor('#ffffff',1);
         })
         .bind('TweenEnd', function(e) {
+            if (localStorage != undefined && localStorage.levels_completed){
+                CURRENT_LEVEL = localStorage.levels_completed;
+            }
             Crafty.scene('Level');
         });
 
