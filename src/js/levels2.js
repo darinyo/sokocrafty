@@ -1,4 +1,6 @@
 
+/**/
+
 var levels = new Array();
 
 var map = new Array();
