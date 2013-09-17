@@ -72,6 +72,7 @@ Crafty.scene('Level', function() {
     player.at(current_level['player'][0], current_level['player'][1]);
     Crafty.viewport.centerOn(player);
     Crafty.viewport.follow(player);
+    Crafty.viewport.y = 25;
 });
 
 Crafty.scene('Menu', function(){
@@ -245,7 +246,8 @@ Crafty.scene('Select Level', function() {
         } else {
             var image = "assets/images/candado.png";
             var attr = { x:x_pos + 75 , y: y_pos + 30, w: 100, h: 58, level: i+1};
-            var onclick = levelBlocked;
+            // var onclick = levelBlocked;
+            var onclick = loadLevel;
         }
 
         // TEXT NUM LEVEL

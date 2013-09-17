@@ -15,7 +15,7 @@ var LIVES           = 3;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 10;
+var CURRENT_LEVEL   = 1;
 var level_timer;
 
 
@@ -56,9 +56,6 @@ Game = {
         Crafty.canvas.init();
         //Set canvas under interface
         Crafty.canvas._canvas.style.zIndex = '0';
-
-        Crafty.viewport.centerOn('PlayerCharacter');
-        Crafty.viewport.follow('')
 
         // Simply start the "Game" scene to get things going
         Crafty.scene('Loading');
