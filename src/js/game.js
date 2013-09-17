@@ -5,6 +5,7 @@ var EMPTY           = 0;
 var WALL            = 1;
 var FINISH          = 2;
 var BOX             = 3;
+var FINISH_AND_BOX  = 4;
 
 var MARGIN          = 0;
 
@@ -14,7 +15,7 @@ var LIVES           = 3;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 1;
+var CURRENT_LEVEL   = 10;
 var level_timer;
 
 

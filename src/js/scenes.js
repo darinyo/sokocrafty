@@ -21,6 +21,7 @@ Crafty.scene('Level', function() {
     for( var i=current_level['height']-1; i>=0; i--){
         for( var j=current_level['width']-1; j>=0; j--){
             var element = '';
+            var boxOnFinish = false;
             switch (current_level[i][j]) {
                 case WALL:
                     element = 'Wall';
@@ -31,14 +32,16 @@ Crafty.scene('Level', function() {
                 case FINISH:
                     element = 'StoreBox';
                     break;
+                case FINISH_AND_BOX:
+                    Crafty.e('StoreBox').at(j, i);
+                    boxOnFinish = Crafty.e('Box').at(j, i);
+                    boxOnFinish.updateFinishTexture(false);
             }
             if (element != ''){
                 Crafty.e(element).at(j, i);
             }
         }
     }
-
-
 
     $('#lives').html('0'+LIVES);
     $('#boxsOnFinish').html(0);
@@ -232,17 +235,7 @@ Crafty.scene('Select Level', function() {
             .css(text_css)
             .unselectable()
 
-        Crafty.e('2D, DOM, Mouse, Text')
-            .text('Level ' + ((i*1)+1))
-            .attr({ x:x_pos , y: y_pos, w: 200, h: 25, level: i+1})
-            .textFont({ size: '24px', family: 'Faster One' })
-            .textColor('#adadad')
-            .css(text_css)
-            .unselectable()
-            .bind('Click', function() {
-                CURRENT_LEVEL = this.attr('level');
-                Crafty.scene('Level');
-            });
+
 
         if ( i==0 || levels_completed > i) {
             var image = "assets/images/level"+(i+1)+".png";
@@ -255,6 +248,17 @@ Crafty.scene('Select Level', function() {
             var onclick = levelBlocked;
         }
 
+        // TEXT NUM LEVEL
+        Crafty.e('2D, DOM, Mouse, Text')
+            .text('Level ' + ((i*1)+1))
+            .attr({ x:x_pos , y: y_pos, w: 200, h: 25, level: i+1})
+            .textFont({ size: '24px', family: 'Faster One' })
+            .textColor('#adadad')
+            .css(text_css)
+            .unselectable()
+            .bind('Click', onclick);
+
+        // IMAGE LEVEL
         Crafty.e('2D, DOM, Mouse, Image')
             .attr(attr)
             .image(image)

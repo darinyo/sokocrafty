@@ -91,7 +91,7 @@ Crafty.c('Box', {
         return this;
     },
 
-    checkOnFinish: function() {
+    checkOnFinish: function(checkLevelFinished) {
         var box = this;
         var isOnFinish = false;
 
@@ -102,7 +102,7 @@ Crafty.c('Box', {
         });
         box._onFinish = isOnFinish;
 
-        if(this.checkLevelFinished()) {
+        if(checkLevelFinished && this.checkLevelFinished()) {
             CURRENT_LEVEL++;
             if (CURRENT_LEVEL > localStorage.levels_completed) {
                 localStorage.levels_completed = CURRENT_LEVEL;
@@ -166,15 +166,15 @@ Crafty.c('Box', {
     },
 
     moveBox: function(direction, pixels) {
-
         this.resetBoxDirections()
         this.setDirection(direction);
         this.setSpeed(pixels);
-
         this.move(direction, pixels);
+        this.updateFinishTexture(true);
+    },
 
-        this.checkOnFinish();
-
+    updateFinishTexture: function(checkLevelFinished) {
+        this.checkOnFinish(checkLevelFinished);
         if (this.isOnFinish()) {
             this.addComponent('spr_box_finish');
             this.removeComponent('spr_box');
