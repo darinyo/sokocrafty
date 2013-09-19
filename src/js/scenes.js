@@ -278,7 +278,6 @@ Crafty.scene('Select Level', function() {
             scrollup = false;
         })
         .bind('EnterFrame', function(){
-            console.log('aaa');
             this.attr({ x:Math.abs(Crafty.viewport._x) + ARROW_X_DELTA , y: Math.abs(Crafty.viewport._y) + ARROW_UP_Y_DELTA, z:2, w: 50, h: 50});
             if (scrollup && !scrolling) {
                 scrolling = true;
