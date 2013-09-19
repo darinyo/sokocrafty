@@ -226,8 +226,6 @@ Crafty.scene('Select Level', function() {
         var x_pos = 30 + x_col*200;
 
 
-        Crafty.viewport.mouselook(true);
-
         Crafty.e('2D, DOM, Text')
             .text('Select Level')
             .attr({ x:140 , y: 30, w: 400, h: 30})
@@ -267,31 +265,52 @@ Crafty.scene('Select Level', function() {
             .bind('Click', onclick);
     }
 
-    Crafty.e('2D, DOM, Mouse, Image, Tween, Arrow')
-        .attr({ x:600 , y: 10, w: 50, h: 50})
+    var ARROW_X_DELTA = 580;
+    var ARROW_UP_Y_DELTA = 30;
+    var ARROW_DOWN_Y_DELTA = 390;
+
+    Crafty.e('2D, DOM, Mouse, Image, Arrow')
         .image("assets/images/FlechaUp.png")
-        .bind('Click', function() {
-            moveViewport('y', -50, 30)
+        .bind('MouseDown', function() {
+            scrollup = true;
+        })
+        .bind('MouseUp', function() {
+            scrollup = false;
+        })
+        .bind('EnterFrame', function(){
+            console.log('aaa');
+            this.attr({ x:Math.abs(Crafty.viewport._x) + ARROW_X_DELTA , y: Math.abs(Crafty.viewport._y) + ARROW_UP_Y_DELTA, z:2, w: 50, h: 50});
+            if (scrollup && !scrolling) {
+                scrolling = true;
+                moveViewport('y', -60, 10);
+                scrolling = false;
+            }
         });
 
-    Crafty.e('2D, DOM, Mouse, Image, Tween, Arrow')
-        .attr({ x:600 , y: 370, w: 50, h: 50})
+    Crafty.e('2D, DOM, Mouse, Image, Arrow')
         .image("assets/images/FlechaDown.png")
-
-        .bind('Click', function() {
-            moveViewport('y', 50, 30)
+        .bind('MouseDown', function() {
+            scrolldown = true;
+        })
+        .bind('MouseUp', function() {
+            scrolldown = false;
+        })
+        .bind('EnterFrame', function(){
+            this.attr({ _x:Math.abs(Crafty.viewport._x) + ARROW_X_DELTA , _y: Math.abs(Crafty.viewport._y) + ARROW_DOWN_Y_DELTA, z:2, w: 50, h: 50});
+            if (scrolldown && !scrolling) {
+                scrolling = true;
+                moveViewport('y', 60, 10);
+                scrolling = false;
+            }
         });
 
-    function moveViewport(axis, pixels, frames){
+    var scrolldown = false;
+    var scrollup = false;
+    var scrolling = false;
+
+    function moveViewport(axis, pixels, frames) {
         Crafty.viewport.pan(axis, pixels, frames);
-        Crafty('Arrow').each(function() {
-             var current_y = this.attr('y');
-            var current_x = this.attr('x');
-            this.tween({x: current_x, y:current_y+pixels},30);
-        });
     }
-
-
 });
 
 
