@@ -6,6 +6,8 @@
     height: 20px;
     border-radius: 20px;
     margin-top:3px;
+    position: relative;
+    z-index:2;
 }
 
 #scoreboard div {
