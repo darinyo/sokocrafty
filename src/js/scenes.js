@@ -10,9 +10,8 @@ var text_css = { 'text-align': 'center' }
 
 Crafty.scene('Level', function() {
 
-//    Crafty.background('url("assets/images/bg1.jpg")');
+    Crafty.background('url("assets/images/bg2.jpg")');
     $('#scoreboard').show();
-
 
     var current_level = levels[CURRENT_LEVEL];
     // Pintamos el mapa
@@ -70,13 +69,16 @@ Crafty.scene('Level', function() {
     // Situamos al jugador
     var player = Crafty.e('PlayerCharacter');
     player.at(current_level['player'][0], current_level['player'][1]);
+
     Crafty.viewport.centerOn(player);
     Crafty.viewport.follow(player);
-    Crafty.viewport.y = 25;
+
 });
 
 Crafty.scene('Menu', function(){
 //    Crafty.audio.play("bgMusic", -1);
+
+    Crafty.background('url("assets/images/bg_menu.png")');
 
     $('#scoreboard').hide();
 
@@ -202,6 +204,8 @@ Crafty.scene('Menu', function(){
 
 Crafty.scene('Select Level', function() {
 
+    Crafty.background('url("assets/images/bg.png")');
+
     if(typeof(Storage)!=="undefined") {
         var levels_completed = localStorage.levels_completed;
         if (!levels_completed) {
@@ -321,7 +325,7 @@ Crafty.scene('Loading', function(){
 
     // Draw some text for the player to see in case the file
     //  takes a noticeable amount of time to load
-    Crafty.background('url("assets/images/bg2.jpg")');
+    Crafty.background('url("assets/images/bg.png")');
 
 
     Crafty.e('2D, DOM, Text')
