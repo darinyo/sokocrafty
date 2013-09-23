@@ -85,7 +85,7 @@ Crafty.scene('Menu', function(){
     var player = Crafty.e('PlayerCharacterMenu').at(-1,-1);
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Play')
-        .attr({ x:250 , y: 100, w: 200, h: 60 })
+        .attr({ x:250 , y: 150, w: 200, h: 60 })
         .textFont({ size: '36px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
@@ -93,7 +93,7 @@ Crafty.scene('Menu', function(){
         .bind('Click', function() {
 
             player.x = 260;
-            player.y = 115;
+            player.y = 165;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -115,7 +115,7 @@ Crafty.scene('Menu', function(){
 
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Levels')
-        .attr({ x:250 , y: 170, w: 200, h: 60 })
+        .attr({ x:250 , y: 220, w: 200, h: 60 })
         .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
@@ -123,7 +123,7 @@ Crafty.scene('Menu', function(){
         .bind('Click', function() {
 
             player.x = 275;
-            player.y = 170;
+            player.y = 220;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -143,7 +143,7 @@ Crafty.scene('Menu', function(){
 
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Options')
-        .attr({ x:250 , y: 220, w: 200, h: 60 })
+        .attr({ x:250 , y: 270, w: 200, h: 60 })
         .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
@@ -151,7 +151,7 @@ Crafty.scene('Menu', function(){
         .bind('Click', function() {
 
             player.x = 250;
-            player.y = 220;
+            player.y = 270;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -173,7 +173,7 @@ Crafty.scene('Menu', function(){
 
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('About')
-        .attr({ x:250 , y: 270, w: 200, h: 60 })
+        .attr({ x:250 , y: 320, w: 200, h: 60 })
         .textFont({ size: '24px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
@@ -181,7 +181,7 @@ Crafty.scene('Menu', function(){
         .bind('Click', function() {
 
             player.x = 270;
-            player.y = 270;
+            player.y = 320;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
