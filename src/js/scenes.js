@@ -14,9 +14,8 @@ Crafty.scene('Level', function() {
     $('#scoreboard').show();
 
     var current_level = levels[CURRENT_LEVEL];
+
     // Pintamos el mapa
-
-
     for( var i=current_level['height']-1; i>=0; i--){
         for( var j=current_level['width']-1; j>=0; j--){
             var element = '';
@@ -42,14 +41,36 @@ Crafty.scene('Level', function() {
         }
     }
 
+    // Print stadistics
     $('#lives').html('0'+LIVES);
     $('#boxsOnFinish').html(0);
     $('#total_boxs').html(current_level['boxes']);
     $('#time').html(current_level['time']);
     $('#level').html('0'+current_level['level']);
 
-    var seconds = current_level['time'];
+    // Print menu buttons
+    Crafty.e('2D, DOM, Mouse, Image')
+        .attr({ x:400 , y: 300, w: 64, h: 64})
+        .image('assets/images/icons/64px/reload.png')
+        .bind('Click', function(){
+            LIVES --;
+            if (LIVES == 0) {
+                Crafty.scene('Game Over');
+            } else {
+                Crafty.scene('Level');
+            }
+        });
 
+    // Print player
+    var player = Crafty.e('PlayerCharacter');
+    player.at(current_level['player'][0], current_level['player'][1]);
+    Crafty.viewport.centerOn(player);
+    Crafty.viewport.follow(player);
+    Crafty.viewport.y = 25;
+
+
+    // Init time interval
+    var seconds = current_level['time'];
     level_timer = window.setInterval(function(){
         seconds --;
         $('#time').html(seconds);
@@ -65,13 +86,12 @@ Crafty.scene('Level', function() {
         }
     },1000);
 
+    // Center Map on player
+    window.setTimeout(function(){
+        Crafty.viewport.centerOn(player, 1);
+        Crafty.viewport.follow(player);
+    }, 1);
 
-    // Situamos al jugador
-    var player = Crafty.e('PlayerCharacter');
-    player.at(current_level['player'][0], current_level['player'][1]);
-
-    Crafty.viewport.centerOn(player);
-    Crafty.viewport.follow(player);
 
 });
 
