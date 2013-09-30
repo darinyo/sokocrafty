@@ -33,7 +33,7 @@ Crafty.scene('Loading', function(){
         'assets/spr_player_128.png',
         'assets/box.png',
         'assets/box_finish.png',
-        'assets/play-button.gif'
+        'assets/test.png'
         ], function(){
         // Once the image is loaded...
 
@@ -50,10 +50,6 @@ Crafty.scene('Loading', function(){
           spr_store:    [0, 0]
         });
 
-        Crafty.sprite(200, 60, 'assets/play-button.gif', {
-            btn_play:    [0, 0]
-        });
-
         // Define the PC's sprite to be the first sprite in the third row of the
         //  animation sprite map
         Crafty.sprite(32, 32, 'assets/spr_player_128.png', {
@@ -66,6 +62,10 @@ Crafty.scene('Loading', function(){
 
         Crafty.sprite(32, 'assets/box_finish.png', {
             spr_box_finish:  [0, 0]
+        });
+
+        Crafty.sprite(32, 'assets/test.png', {
+            spr_fruit:  [0, 0]
         });
 
         Crafty.audio.add("bgMusic", "assets/sounds/bg-music.mp3");
