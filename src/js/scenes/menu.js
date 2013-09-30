@@ -28,21 +28,21 @@ Crafty.scene('Menu', function(){
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
-            this.tween({x: 700}, 155);
+            this.tween({x: 700}, 155).bind('TweenEnd', function(e) {
+                if (localStorage != undefined && localStorage.levels_completed){
+                    CURRENT_LEVEL = localStorage.levels_completed;
+                }
+                Crafty.scene('Level');
+            });
 
         })
         .bind('MouseOver', function(e) {
-            this.textColor('#ff0000',1);
+            this.textColor('#000000',1);
         })
         .bind('MouseOut', function(e) {
             this.textColor('#ffffff',1);
-        })
-        .bind('TweenEnd', function(e) {
-            if (localStorage != undefined && localStorage.levels_completed){
-                CURRENT_LEVEL = localStorage.levels_completed;
-            }
-            Crafty.scene('Level');
         });
+
 
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Levels')

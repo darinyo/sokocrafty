@@ -1,4 +1,4 @@
-@font-face { font-family: font-menu; src: url('../../assets/fonts/font-menu.ttf') format('truetype'); }
+@font-face { font-family: font-menu; src: url('../../assets/font/font-menu-1.ttf') format('truetype'); }
 
 #scoreboard {
     opacity: 0.8;
@@ -14,7 +14,7 @@
     font-family: 'Faster One', cursive;
     background: none;
     color: white;
-    font-weight: 400;
+    _font-weight: 400;
     float: left;
     width: 24%;
     text-align: center;
