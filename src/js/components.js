@@ -12,10 +12,8 @@
 Crafty.c('Grid', {
     init: function() {
         this.attr({
-//            w: Game.map_grid.tile.width,
-//            h: Game.map_grid.tile.height
-            w: 32,
-            h: 24
+            w: Game.map_grid.tile.width,
+            h: Game.map_grid.tile.height
         })
     },
 
@@ -58,6 +56,113 @@ Crafty.c('Actor', {
         return this._speed;
     }
 });
+
+Crafty.c('Fruit', {
+    init: function() {
+        this.requires('Actor, Color, Solid');
+        this.color('rgba(20, 125, 40, 0)');
+
+        var pos = false;
+        var posValid = false;
+        while (!posValid) {
+            pos = this.randomizePosition();
+            if (pos) {
+                posValid = this.checkPosValid(pos);
+            }
+        }
+        this.at(pos.x, pos.y);
+    },
+
+    randomizePosition: function() {
+        var current_level = levels[CURRENT_LEVEL];
+        var rand_y =  Math.floor((Math.random()*current_level['height']));
+
+        var max_x = 0;
+        var min_x = 0;
+
+        for( var j=current_level['width']-1; j>=0; j--){
+            if (current_level[rand_y][j] == WALL) {
+                if (j > max_x) {
+                    max_x = j;
+                }
+                if (min_x == 0 || j < min_x) {
+                    min_x = j;
+                }
+            }
+        }
+
+        if (max_x > 0) {
+            var checkMin = true;
+            var checkMax = true;
+            while (checkMin && checkMax) {
+                if (checkMin && current_level[rand_y][min_x+1] == WALL ) {
+                    min_x++;
+                } else {
+                    checkMin = false;
+                }
+
+                if (checkMax && current_level[rand_y][max_x-1] == WALL ) {
+                    max_x--;
+                } else {
+                    checkMax = false;
+                }
+            }
+            max_x--;
+            min_x++;
+        }
+
+        if (min_x > max_x) {
+            return false;
+        }
+        if (min_x == 0 && max_x==0) {
+            return false;
+        }
+
+        var rand_x = Math.floor((Math.random()*(max_x - min_x))+min_x);
+        return {x:rand_x, y:rand_y};
+    },
+
+    checkPosValid: function(pos) {
+        var current_level = levels[CURRENT_LEVEL];
+
+        // Si es un wall return false
+        if (current_level[pos.y][pos.x] == WALL) {
+            return false;
+        }
+
+        // Si hay una caja return false;
+        var fruitInBox = false;
+        Crafty('Box').each(function() {
+            boxPos = this.at();
+            if (boxPos.x == pos.x && boxPos.y == pos.y) {
+                fruitInBox = true;
+                console.log('fruit In box');
+                return;
+            }
+        });
+
+        console.log(pos);
+        console.log(fruitInBox);
+
+        // Si no esta en una caja, la posicion es valida
+        return !fruitInBox;
+    }
+});
+
+Crafty.c('Lemon', {
+    init: function() {
+        this.requires('Fruit, spr_fruit');
+        this.color('rgba(20, 125, 40, 0)');
+    },
+    eat: function(player) {
+        MOVEMENT_UNITS = 4;
+        player.removeComponent('Fourway');
+        player.addComponent('Fourway');
+        player.fourway(MOVEMENT_UNITS);
+    }
+});
+
+
 
 Crafty.c('Wall', {
     init: function() {
@@ -217,6 +322,7 @@ Crafty.c('PlayerCharacter', {
             .fourway(MOVEMENT_UNITS)
             .stopOnWall()
             .moveBoxs()
+            .eatSomeFruit()
             .animate('PlayerMovingUp',    0, 2, 2)
             .animate('PlayerMovingRight', 0, 3, 2)
             .animate('PlayerMovingDown',  0, 0, 2)
@@ -256,6 +362,16 @@ Crafty.c('PlayerCharacter', {
         return this;
     },
 
+    eatSomeFruit: function() {
+        this.onHit('Fruit', function(ent){
+            //console.log(ent);
+            var fruit = ent[0].obj;
+            fruit.eat(this);
+            fruit.destroy();
+        });
+        return this;
+    },
+
     moveBoxs: function() {
 
         this.onHit('Box',  function(ent){
@@ -273,10 +389,6 @@ Crafty.c('PlayerCharacter', {
         posBox = box.pos();
         posPlayer = this.pos();
 
-//        console.log(direction);
-//        console.log(posBox);
-//        console.log(posPlayer);
-
         switch (direction) {
             case 'w':
                 if ( this.isAtLeftBox(posBox, posPlayer) && this.isInlineBox(posBox, posPlayer) ) {
@@ -290,13 +402,6 @@ Crafty.c('PlayerCharacter', {
                 } else {
                     return false;
                 }
-            /*case 'n':
-
-                console.log(this.isAtBottomBox(posBox, posPlayer));
-                return this.isAtBottomBox(posBox, posPlayer);
-
-            case 's':
-                return this.isAtTopBox(posBox, posPlayer);*/
         }
 
 

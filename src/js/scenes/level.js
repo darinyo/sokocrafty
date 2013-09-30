@@ -17,6 +17,7 @@ Crafty.scene('Level', function() {
     printMenuButtons();
     printPlayer();
     initTimer();
+    initEvents();
     centerMap();
 
     /*************************************************/
@@ -63,6 +64,7 @@ Crafty.scene('Level', function() {
     }
 
     function printMenuButtons() {
+        return;
         Crafty.e('2D, DOM, Mouse, Image')
         .attr({ x:400 , y: 300, w: 64, h: 64})
         .image('assets/images/icons/64px/reload.png')
@@ -104,10 +106,17 @@ Crafty.scene('Level', function() {
         },1000);
     }
 
+    function initEvents() {
+
+        window.setTimeout(function() {
+            Crafty.e('Lemon');
+        }, 2000);
+    }
+
     function centerMap() {
         window.setTimeout(function(){
-        Crafty.viewport.centerOn(player, 1);
-        Crafty.viewport.follow(player);
+            Crafty.viewport.centerOn(player, 1);
+            Crafty.viewport.follow(player);
         }, 1);
     }
 });
