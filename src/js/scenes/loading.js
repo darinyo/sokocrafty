@@ -33,7 +33,7 @@ Crafty.scene('Loading', function(){
         'assets/images/spr_player_128.png',
         'assets/images/box.png',
         'assets/images/box_finish.png',
-        'assets/images/fruits.png',
+        'assets/images/fruits_new.png',
         ''
         ], function(){
         // Once the image is loaded...
@@ -65,7 +65,7 @@ Crafty.scene('Loading', function(){
             spr_box_finish:  [0, 0]
         });
 
-        Crafty.sprite(24, 24, 'assets/images/fruits.png', {
+        Crafty.sprite(24, 24, 'assets/images/fruits_new.png', {
             spr_naranja:    [0, 0],
             spr_pera:       [0, 1],
             spr_manzana:    [0, 2],
