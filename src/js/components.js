@@ -151,7 +151,7 @@ Crafty.c('Fruit', {
 
 Crafty.c('Lemon', {
     init: function() {
-        this.requires('Fruit, spr_fruit');
+        this.requires('Fruit, spr_sandia');
         this.color('rgba(20, 125, 40, 0)');
     },
     eat: function(player) {

@@ -28,12 +28,13 @@ Crafty.scene('Loading', function(){
 
     // Load our sprite map image
     Crafty.load([
-        'assets/wall2.png',
-        'assets/Bstore2.png',
-        'assets/spr_player_128.png',
-        'assets/box.png',
-        'assets/box_finish.png',
-        'assets/test.png'
+        'assets/images/wall2.png',
+        'assets/images/box_store.png',
+        'assets/images/spr_player_128.png',
+        'assets/images/box.png',
+        'assets/images/box_finish.png',
+        'assets/images/fruits.png',
+        ''
         ], function(){
         // Once the image is loaded...
 
@@ -42,31 +43,39 @@ Crafty.scene('Loading', function(){
         // These components' names are prefixed with "spr_"
         //  to remind us that they simply cause the entity
         //  to be drawn with a certain sprite
-            Crafty.sprite(32, 32, 'assets/wall2.png', {
+            Crafty.sprite(32, 32, 'assets/images/wall2.png', {
           spr_wall:    [0, 0]
         });
 
-        Crafty.sprite(32, 32, 'assets/Bstore2.png', {
+        Crafty.sprite(32, 32, 'assets/images/box_store.png', {
           spr_store:    [0, 0]
         });
 
         // Define the PC's sprite to be the first sprite in the third row of the
         //  animation sprite map
-        Crafty.sprite(32, 32, 'assets/spr_player_128.png', {
+        Crafty.sprite(32, 32, 'assets/images/spr_player_128.png', {
           spr_player:  [0, 2]
         }, 0, 0);
 
-        Crafty.sprite(32, 'assets/box.png', {
+        Crafty.sprite(32, 'assets/images/box.png', {
             spr_box:  [0, 0]
         });
 
-        Crafty.sprite(32, 'assets/box_finish.png', {
+        Crafty.sprite(32, 'assets/images/box_finish.png', {
             spr_box_finish:  [0, 0]
         });
 
-        Crafty.sprite(32, 'assets/test.png', {
-            spr_fruit:  [0, 0]
-        });
+        Crafty.sprite(24, 24, 'assets/images/fruits.png', {
+            spr_naranja:    [0, 0],
+            spr_pera:       [0, 1],
+            spr_manzana:    [0, 2],
+            spr_frambuesa:  [0, 3],
+            spr_uva:        [0, 4],
+            spr_fresa:      [0, 5],
+            spr_limon:      [0, 6],
+            spr_cereza:     [0, 7],
+            spr_sandia:     [0, 8]
+        },0,0);
 
         Crafty.audio.add("bgMusic", "assets/sounds/bg-music.mp3");
 
