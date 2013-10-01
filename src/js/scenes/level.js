@@ -78,6 +78,23 @@ Crafty.scene('Level', function() {
         });
     }
 
+    function printMessageText(texto)
+    {
+
+
+        var message = Crafty.e('2D, DOM, Text, Tween')
+            .text(texto)
+            .attr({ x:250 , y: 270, w: 200, h: 60 })
+            .textFont({ size: '24px', family: 'font-menu' })
+            .textColor('#ffffff', 1)
+            .css(text_css)
+            .unselectable();
+
+
+
+        message.tween({alpha: 0.0}, 100);
+    }
+
     function printPlayer() {
         // Print player
         player = Crafty.e('PlayerCharacter');
