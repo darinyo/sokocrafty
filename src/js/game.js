@@ -1,5 +1,5 @@
 //Constantes mapa
-var MOVEMENT_UNITS  = 4;
+var MOVEMENT_UNITS  = 2;
 
 var EMPTY           = 0;
 var WALL            = 1;
@@ -16,7 +16,7 @@ var SECONDS         = 100;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 1;
+var CURRENT_LEVEL   = 51;
 var level_timer;
 
 var text_css = { 'text-align': 'center' }

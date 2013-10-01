@@ -60,7 +60,6 @@ Crafty.c('Actor', {
 Crafty.c('Fruit', {
     init: function() {
         this.requires('Actor, Color, Solid');
-        this.color('rgba(20, 125, 40, 0)');
 
         var pos = false;
         var posValid = false;
@@ -148,8 +147,15 @@ Crafty.c('Fruit', {
 Crafty.c('Lemon', {
     init: function() {
         this.requires('Fruit, spr_limon');
+        this.requires('Fruit, spr_limon');
     },
     eat: function(player) {
+        MOVEMENT_UNITS = 4;
+        player.requires('Actor, Fourway, Color, spr_player, Collision, SpriteAnimation')
+            .fourway(MOVEMENT_UNITS)
+            .stopOnWall()
+            .moveBoxs()
+            .eatSomeFruit();
         MOVEMENT_UNITS = 6;
         player.fourway(MOVEMENT_UNITS);
     }
