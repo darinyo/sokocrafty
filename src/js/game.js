@@ -10,6 +10,7 @@ var FINISH_AND_BOX  = 4;
 var MARGIN          = 0;
 
 var LIVES           = 3;
+var SECONDS         = 100;
 
 /**
  * Contador del tiempo de juego

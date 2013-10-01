@@ -89,11 +89,11 @@ Crafty.scene('Level', function() {
 
     function initTimer() {
         // Init time interval
-        var seconds = current_level['time'];
+        SECONDS = current_level['time'];
         level_timer = window.setInterval(function(){
-            seconds --;
-            $('#time').html(seconds);
-            if (seconds == 0) {
+            SECONDS --;
+            $('#time').html(SECONDS);
+            if (SECONDS == 0) {
                 LIVES--;
                 $('#lives').html('0'+LIVES);
                 window.clearInterval(level_timer);
@@ -109,7 +109,21 @@ Crafty.scene('Level', function() {
     function initEvents() {
 
         window.setTimeout(function() {
-            Crafty.e('Lemon');
+
+            var randomFruit = Math.floor(Math.random()*3)+1;
+            var fruit;
+            switch (randomFruit) {
+                case 1:
+                    fruit = 'Lemon';
+                    break;
+                case 2:
+                    fruit = 'Strawberry';
+                    break;
+                case 3:
+                    fruit = 'Orange';
+                    break;
+            }
+            Crafty.e(fruit);
         }, 2000);
     }
 

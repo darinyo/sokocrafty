@@ -136,13 +136,9 @@ Crafty.c('Fruit', {
             boxPos = this.at();
             if (boxPos.x == pos.x && boxPos.y == pos.y) {
                 fruitInBox = true;
-                console.log('fruit In box');
                 return;
             }
         });
-
-        console.log(pos);
-        console.log(fruitInBox);
 
         // Si no esta en una caja, la posicion es valida
         return !fruitInBox;
@@ -151,18 +147,32 @@ Crafty.c('Fruit', {
 
 Crafty.c('Lemon', {
     init: function() {
-        this.requires('Fruit, spr_sandia');
-        this.color('rgba(20, 125, 40, 0)');
+        this.requires('Fruit, spr_limon');
     },
     eat: function(player) {
-        MOVEMENT_UNITS = 4;
-        player.removeComponent('Fourway');
-        player.addComponent('Fourway');
+        MOVEMENT_UNITS = 6;
         player.fourway(MOVEMENT_UNITS);
     }
 });
 
+Crafty.c('Strawberry', {
+    init: function() {
+        this.requires('Fruit, spr_fresa');
+    },
+    eat: function(player) {
+        SECONDS += 25;
+    }
+});
 
+Crafty.c('Orange', {
+    init: function() {
+        this.requires('Fruit, spr_naranja');
+    },
+    eat: function(player) {
+        LIVES ++;
+        $('#lives').html('0'+LIVES);
+    }
+});
 
 Crafty.c('Wall', {
     init: function() {
@@ -291,7 +301,6 @@ Crafty.c('Box', {
 
     isOnFinish: function() {
         return this._onFinish;
-//        if (this.is)
     }
 });
 
