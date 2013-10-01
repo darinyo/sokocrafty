@@ -60,7 +60,7 @@ Crafty.c('Actor', {
 Crafty.c('Fruit', {
     init: function() {
         this.requires('Actor, Color, Solid');
-
+        this.attr('_ttl', 10);
         var pos = false;
         var posValid = false;
         while (!posValid) {
@@ -69,7 +69,27 @@ Crafty.c('Fruit', {
                 posValid = this.checkPosValid(pos);
             }
         }
+        this.startEvents();
         this.at(pos.x, pos.y);
+    },
+
+    startEvents: function() {
+        var fruit = this;
+        var intervalDestroy = setInterval(function() {
+            fruit._ttl--;
+            console.log(fruit);
+            if (fruit._ttl == 0) {
+                fruit.destroy()
+            }
+        }, 1000);
+    },
+
+    decreaseTtl: function() {
+        this._ttl--;
+        console.log(this);
+        if (this._ttl == 0) {
+            this.destroy()
+        }
     },
 
     randomizePosition: function() {
@@ -147,7 +167,6 @@ Crafty.c('Fruit', {
 Crafty.c('Lemon', {
     init: function() {
         this.requires('Fruit, spr_limon');
-        this.requires('Fruit, spr_limon');
     },
     eat: function(player) {
         MOVEMENT_UNITS = 4;
@@ -156,8 +175,6 @@ Crafty.c('Lemon', {
             .stopOnWall()
             .moveBoxs()
             .eatSomeFruit();
-        MOVEMENT_UNITS = 6;
-        player.fourway(MOVEMENT_UNITS);
     }
 });
 
