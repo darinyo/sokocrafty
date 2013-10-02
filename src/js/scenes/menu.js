@@ -71,7 +71,6 @@ Crafty.scene('Menu', function(){
             Crafty.scene('Select Level');
         });
 
-
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Options')
         .attr({ x:250 , y: 270, w: 200, h: 60 })
@@ -128,4 +127,6 @@ Crafty.scene('Menu', function(){
         .bind('TweenEnd', function(e) {
             Crafty.scene('About');
         });
+
+
 });

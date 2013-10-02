@@ -73,6 +73,29 @@ Crafty.c('Fruit', {
         this.at(pos.x, pos.y);
     },
 
+    printMessageText: function(texto) {
+
+    var sizeFont = 24;
+    var lenChars = texto.length;
+    var posX = ( ((Crafty.viewport.width + Crafty.viewport.x) / 2)  - (lenChars * sizeFont)/2);
+    var posY = ( ((Crafty.viewport.height + Crafty.viewport.y) / 2) - 198 );
+
+        alert(posY);
+
+    var message = Crafty.e('2D, DOM, Text, Tween')
+        .text(texto)
+        .attr({ x:posX , y: posY, w: lenChars*sizeFont, h: 60 })
+        .textFont({ size: sizeFont+'px', family: 'fruit' })
+        .textColor('#ffffff', 1)
+        .css(text_css)
+        .unselectable();
+
+        setTimeout(function(){
+            message.tween({alpha: 0.0}, 125);
+        },1000);
+
+    },
+
     startEvents: function() {
         var fruit = this;
         this.intervalDestroy = setInterval(function() {
@@ -188,6 +211,7 @@ Crafty.c('Lemon', {
             .stopOnWall()
             .moveBoxs()
             .eatSomeFruit();
+        this.printMessageText('speed up');
     }
 
 
@@ -199,6 +223,8 @@ Crafty.c('Strawberry', {
     },
     eat: function(player) {
         SECONDS += 25;
+        this.printMessageText('timer up');
+
     }
 });
 
@@ -209,6 +235,7 @@ Crafty.c('Orange', {
     eat: function(player) {
         LIVES ++;
         $('#lives').html('0'+LIVES);
+        this.printMessageText('lives up');
     }
 });
 
