@@ -140,6 +140,7 @@ Crafty.scene('Level', function() {
                     fruit = 'Orange';
                     break;
             }
+//            fruit = 'Lemon';
             Crafty.e(fruit);
         }, 2000);
     }

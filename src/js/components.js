@@ -75,9 +75,8 @@ Crafty.c('Fruit', {
 
     startEvents: function() {
         var fruit = this;
-        var intervalDestroy = setInterval(function() {
+        this.intervalDestroy = setInterval(function() {
             fruit._ttl--;
-            console.log(fruit);
             if (fruit._ttl == 0) {
                 fruit.destroy()
             }
@@ -161,6 +160,11 @@ Crafty.c('Fruit', {
 
         // Si no esta en una caja, la posicion es valida
         return !fruitInBox;
+    },
+    eatFruit: function(player) {
+        clearInterval(this.intervalDestroy);
+        this.eat(player);
+        this.destroy();
     }
 });
 
@@ -169,13 +173,24 @@ Crafty.c('Lemon', {
         this.requires('Fruit, spr_limon');
     },
     eat: function(player) {
-        MOVEMENT_UNITS = 4;
+        this.modifyPlayerSpeed(player, 4);
+        var fruit = this;
+        // Restart default values on 20 sec
+        setTimeout(function(){
+            fruit.modifyPlayerSpeed(player, 2);
+        }, 20000);
+    },
+    modifyPlayerSpeed: function(player, speed) {
+        console.log(speed);
+        MOVEMENT_UNITS = speed;
         player.requires('Actor, Fourway, Color, spr_player, Collision, SpriteAnimation')
             .fourway(MOVEMENT_UNITS)
             .stopOnWall()
             .moveBoxs()
             .eatSomeFruit();
     }
+
+
 });
 
 Crafty.c('Strawberry', {
@@ -398,8 +413,7 @@ Crafty.c('PlayerCharacter', {
         this.onHit('Fruit', function(ent){
             //console.log(ent);
             var fruit = ent[0].obj;
-            fruit.eat(this);
-            fruit.destroy();
+            fruit.eatFruit(this);
         });
         return this;
     },
