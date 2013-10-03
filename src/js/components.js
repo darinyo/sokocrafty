@@ -75,10 +75,10 @@ Crafty.c('Fruit', {
 
     printMessageText: function(texto) {
 
-    var sizeFont = 60;
+    var sizeFont = 50;
     var lenChars = texto.length;
-    var posX = ( ((Crafty.viewport.width + Crafty.viewport.x) / 2)  - (lenChars * sizeFont)/2);
-    var posY = ( ((Crafty.viewport.height + Crafty.viewport.y) / 2) - 198 );
+    var posX = ( ((Game.width()/2)) - (lenChars * sizeFont)/2);
+    var posY = ( ((Game.height()/2) - sizeFont));
 
     var message = Crafty.e('2D, DOM, Text, Tween')
         .text(texto)
@@ -89,16 +89,14 @@ Crafty.c('Fruit', {
         .unselectable();
 
         Crafty.audio.play("alarm",1);
-
         Crafty.viewport.centerOn(message);
         setTimeout(function(){
-            message.tween({alpha: 0.0, x:640 }, 80);
+            message.tween({alpha: 0.0, x:640, }, 80);
         },1000);
 
         message.bind('TweenEnd', function(e) {
             Crafty.viewport.centerOn(Crafty('PlayerCharacter'));
             message.destroy();
-
         });
 
 

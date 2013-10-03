@@ -109,6 +109,7 @@ Crafty.scene('Level', function() {
 
     function initEvents() {
 
+
         setTimeout(createFruits, 2000);
 
         function createFruits() {
@@ -178,11 +179,11 @@ Crafty.scene('Level', function() {
             // variable tickets
             var timeTickets = getTimeTickets();
             var lifeTickets = getLifeTickets();
-            var boxTickets = getLifeTickets();
+            var boxTickets = getBoxesTickets();
 
             // Fruit tickets
             var strawberrytickets = timeTickets;
-            var orangeTickets = lifeTickets();
+            var orangeTickets = lifeTickets;
             var lemonTickets = getLemonTickets(timeTickets, boxTickets);
             var noFruitTickets = 2;
 
@@ -190,15 +191,14 @@ Crafty.scene('Level', function() {
             var randomFruit = Math.floor(Math.random()*totalTickets)+1;
 
             var fruit;
-
             if (randomFruit > 0 && randomFruit <= strawberrytickets ) {
                 fruit = 'Strawberry';
-            } else if (randomFruit <= strawberrytickets + orangeTickets) {
+            } else if (randomFruit <= (strawberrytickets + orangeTickets)) {
                 fruit = 'Orange';
-            } else if (randomFruit <= strawberrytickets + orangeTickets + lemonTickets) {
+            } else if (randomFruit <= (strawberrytickets + orangeTickets + lemonTickets)) {
                 fruit = 'Lemon';
             } else {
-                fruit = null
+                fruit = '';
             }
 
             if (fruit) {
@@ -209,7 +209,8 @@ Crafty.scene('Level', function() {
             var minWaitTime = 15;
             var maxWaitTime = 20; // Don't include the min time  -> max time = (15 + 20)
             var newFruitTime = minWaitTime + Math.floor( Math.random() * maxWaitTime ) + 1;
-            setTimeout(createFruits, newFruitTime);
+
+            setTimeout(createFruits, newFruitTime*500);
         }
     }
 
