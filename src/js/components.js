@@ -75,23 +75,22 @@ Crafty.c('Fruit', {
 
     printMessageText: function(texto) {
 
-    var sizeFont = 24;
+    var sizeFont = 60;
     var lenChars = texto.length;
     var posX = ( ((Crafty.viewport.width + Crafty.viewport.x) / 2)  - (lenChars * sizeFont)/2);
     var posY = ( ((Crafty.viewport.height + Crafty.viewport.y) / 2) - 198 );
 
-        alert(posY);
-
     var message = Crafty.e('2D, DOM, Text, Tween')
         .text(texto)
-        .attr({ x:posX , y: posY, w: lenChars*sizeFont, h: 60 })
-        .textFont({ size: sizeFont+'px', family: 'fruit' })
-        .textColor('#ffffff', 1)
+        .attr({ x:0 , y: posY, w: lenChars*sizeFont, h: 60 })
+        .textFont({ size: '60px', family: 'font-messages' })
+        .textColor('#f7fe2e', 1)
         .css(text_css)
         .unselectable();
 
         setTimeout(function(){
-            message.tween({alpha: 0.0}, 125);
+            Crafty.audio.play("alarm",1,1);
+            message.tween({alpha: 0.0, x:700 }, 90);
         },1000);
 
     },

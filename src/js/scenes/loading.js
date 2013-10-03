@@ -25,6 +25,7 @@ Crafty.scene('Loading', function(){
         .css(text_css)
         .unselectable();
 
+    Crafty.audio.add("alarm", "assets/sounds/alarm.mp3");
 
     // Load our sprite map image
     Crafty.load([

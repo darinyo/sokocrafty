@@ -1,5 +1,6 @@
 @font-face { font-family:font-fruit; src: url('../../assets/font/font-fruit-1.ttf') format('truetype'); }
 @font-face { font-family:font-menu; src: url('../../assets/font/font-menu-1.ttf') format('truetype'); }
+@font-face { font-family:font-messages; src: url('../../assets/font/font-messages.ttf') format('truetype'); }
 
 
 #scoreboard {
