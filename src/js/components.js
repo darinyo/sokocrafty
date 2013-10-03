@@ -88,7 +88,7 @@ Crafty.c('Fruit', {
         .css(text_css)
         .unselectable();
 
-        Crafty.audio.play("alarm",1,1);
+        Crafty.audio.play("alarm",1);
         setTimeout(function(){
             message.tween({alpha: 0.0, x:700 }, 80);
         },1000);
