@@ -16,7 +16,7 @@ var SECONDS         = 100;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 51;
+var CURRENT_LEVEL   = 52;
 var level_timer;
 
 var text_css = { 'text-align': 'center' }

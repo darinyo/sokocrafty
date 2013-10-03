@@ -89,9 +89,18 @@ Crafty.c('Fruit', {
         .unselectable();
 
         Crafty.audio.play("alarm",1);
+
+        Crafty.viewport.centerOn(message);
         setTimeout(function(){
-            message.tween({alpha: 0.0, x:700 }, 80);
+            message.tween({alpha: 0.0, x:640 }, 80);
         },1000);
+
+        message.bind('TweenEnd', function(e) {
+            Crafty.viewport.centerOn(Crafty('PlayerCharacter'));
+            message.destroy();
+
+        });
+
 
     },
 
