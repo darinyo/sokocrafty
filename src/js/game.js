@@ -11,6 +11,7 @@ var MARGIN          = 0;
 
 var LIVES           = 3;
 var SECONDS         = 100;
+var BOXS_ON_FINISH  = 0;
 
 /**
  * Contador del tiempo de juego

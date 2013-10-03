@@ -221,8 +221,6 @@ Crafty.c('Lemon', {
             .eatSomeFruit();
         this.printMessageText('speed up');
     }
-
-
 });
 
 Crafty.c('Strawberry', {
@@ -302,15 +300,15 @@ Crafty.c('Box', {
 
     checkLevelFinished: function() {
         var levelFinished = true;
-        var totalBoxes = 0;
+        BOXS_ON_FINISH = 0;
         Crafty('Box').each(function() {
             if (!this.isOnFinish()) {
                 levelFinished = false;
             } else {
-                totalBoxes ++;
+                BOXS_ON_FINISH ++;
             }
         });
-        $('#boxsOnFinish').text(totalBoxes);
+        $('#boxsOnFinish').text(BOXS_ON_FINISH);
         return levelFinished;
     },
     resetBoxDirections: function() {

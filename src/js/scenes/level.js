@@ -10,6 +10,7 @@ Crafty.scene('Level', function() {
 
     var player;
     var current_level = levels[CURRENT_LEVEL];
+    BOXS_ON_FINISH = 0;
 
     printBackground();
     printCurrentMap();
@@ -108,24 +109,108 @@ Crafty.scene('Level', function() {
 
     function initEvents() {
 
-        window.setTimeout(function() {
+        setTimeout(createFruits, 2000);
 
-            var randomFruit = Math.floor(Math.random()*3)+1;
-            var fruit;
-            switch (randomFruit) {
-                case 1:
-                    fruit = 'Lemon';
-                    break;
-                case 2:
-                    fruit = 'Strawberry';
-                    break;
-                case 3:
-                    fruit = 'Orange';
-                    break;
+        function createFruits() {
+
+            function getTimeTickets() {
+
+                var totalMapTime = current_level['time'];
+                var UMBRAL_NO_TICKETS = 70;
+                var UMBRAL_UN_TICKET = 50;
+                var UMBRAL_DOS_TICKETS = 30;
+                var UMBRAL_TRES_TICKETS = 15;
+
+                var percentualTime = Math.round(( SECONDS * 100 ) / totalMapTime);
+
+                if (percentualTime >  UMBRAL_NO_TICKETS) {
+                    return 0;
+                }
+                if (percentualTime >  UMBRAL_UN_TICKET) {
+                    return 1;
+                }
+                if (percentualTime >  UMBRAL_DOS_TICKETS) {
+                    return 2;
+                }
+                if (percentualTime >  UMBRAL_TRES_TICKETS) {
+                    return 3;
+                }
+
+                return 4;
             }
-//            fruit = 'Lemon';
-            Crafty.e(fruit);
-        }, 2000);
+
+            function getBoxesTickets() {
+
+                var totalBoxes = current_level['boxes'];
+
+                var UMBRAL_NO_TICKETS = 80;
+                var UMBRAL_UN_TICKET = 50;
+                var UMBRAL_DOS_TICKETS = 30;
+
+                var percentualBoxes =  Math.round(( BOXS_ON_FINISH * 100 ) / totalBoxes);
+
+                if (percentualBoxes >  UMBRAL_NO_TICKETS) {
+                    return 0;
+                }
+
+                if (percentualBoxes >  UMBRAL_UN_TICKET) {
+                    return 1;
+                }
+
+                if (percentualBoxes >  UMBRAL_DOS_TICKETS) {
+                    return 2;
+                }
+                return 3;
+            }
+
+            function getLifeTickets() {
+                if (LIVES > 5) return 0;
+                if (LIVES > 3) return 1; // 4- 5
+                if (LIVES > 2) return 2; // 3
+                if (LIVES > 1) return 3; // 2
+                return 4; // 1 vida
+            }
+
+            function getLemonTickets(timetickets, boxstickets) {
+                return Math.round( (timetickets + boxstickets) / 2);
+            }
+
+            // variable tickets
+            var timeTickets = getTimeTickets();
+            var lifeTickets = getLifeTickets();
+            var boxTickets = getLifeTickets();
+
+            // Fruit tickets
+            var strawberrytickets = timeTickets;
+            var orangeTickets = lifeTickets();
+            var lemonTickets = getLemonTickets(timeTickets, boxTickets);
+            var noFruitTickets = 2;
+
+            var totalTickets = strawberrytickets + orangeTickets + lemonTickets + noFruitTickets;
+            var randomFruit = Math.floor(Math.random()*totalTickets)+1;
+
+            var fruit;
+
+            if (randomFruit > 0 && randomFruit <= strawberrytickets ) {
+                fruit = 'Strawberry';
+            } else if (randomFruit <= strawberrytickets + orangeTickets) {
+                fruit = 'Orange';
+            } else if (randomFruit <= strawberrytickets + orangeTickets + lemonTickets) {
+                fruit = 'Lemon';
+            } else {
+                fruit = null
+            }
+
+            if (fruit) {
+                Crafty.e(fruit);
+            }
+
+
+            var minWaitTime = 15;
+            var maxWaitTime = 20; // Don't include the min time  -> max time = (15 + 20)
+            var newFruitTime = minWaitTime + Math.floor( Math.random() * maxWaitTime ) + 1;
+            setTimeout(createFruits, newFruitTime);
+        }
     }
 
     function centerMap() {
