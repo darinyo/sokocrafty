@@ -9,7 +9,7 @@
 
 var ini_x = 100;
 var ini_y = 450;
-var ini_w = 200;
+var ini_w = 300;
 var ini_h = 60;
 
 Crafty.scene('About', function() {
@@ -26,7 +26,7 @@ function addCreditsAuthor(name)
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text(name)
         .attr({ x: ini_x , y: ini_y, w: ini_w, h: ini_h })
-        .textFont({ size: '20px', family: 'font-menu' })
+        .textFont({ size:'42px', family: 'font-menu' })
         .textColor('#000',1)
         .css(text_css)
         .unselectable()
@@ -36,12 +36,10 @@ function addCreditsAuthor(name)
             Crafty.e('2D, DOM, Mouse, Text, Tween')
             .text(name)
             .attr({ x: ini_x , y: ini_y, w: ini_w, h: ini_h })
-            .textFont({ size: '20px', family: 'font-menu' })
+            .textFont({ size:'42px', family:'font-menu' })
             .textColor('#000',1)
             .css(text_css)
             .unselectable()
             .tween({alpha: 0.0, x: 100, y: 100}, 200);
     }, 5000);
 }
-
-

@@ -9,22 +9,22 @@
 Crafty.scene('Menu', function(){
 //    Crafty.audio.play("bgMusic", -1);
 
-    Crafty.background('url("assets/images/bg_menu.png")');
+    Crafty.background('url("assets/images/bg-game.png")');
 
     $('#scoreboard').hide();
 
     var player = Crafty.e('PlayerCharacterMenu').at(-1,-1);
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Play')
-        .attr({ x:250 , y: 150, w: 200, h: 60 })
-        .textFont({ size: '36px', family: 'font-menu' })
-        .textColor('#ffffff',1)
+        .attr({ x:250 , y: 110, w: 200, h: 60 })
+        .textFont({ size: '100px', family: 'font-menu' })
+        .textColor('#ffff00',1)
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
 
-            player.x = 260;
-            player.y = 165;
+            player.x = 265;
+            player.y = 170;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -40,21 +40,21 @@ Crafty.scene('Menu', function(){
             this.textColor('#000000',1);
         })
         .bind('MouseOut', function(e) {
-            this.textColor('#ffffff',1);
+            this.textColor('#ffff00',1);
         });
 
 
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Levels')
         .attr({ x:250 , y: 220, w: 200, h: 60 })
-        .textFont({ size: '24px', family: 'font-menu' })
+        .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
 
-            player.x = 275;
-            player.y = 220;
+            player.x = 280;
+            player.y = 250;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -74,14 +74,14 @@ Crafty.scene('Menu', function(){
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Options')
         .attr({ x:250 , y: 270, w: 200, h: 60 })
-        .textFont({ size: '24px', family: 'font-menu' })
+        .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
 
-            player.x = 250;
-            player.y = 270;
+            player.x = 255;
+            player.y = 295;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);
@@ -101,17 +101,17 @@ Crafty.scene('Menu', function(){
 
 
 
-    Crafty.e('2D, DOM, Mouse, Text, Tween')
+    var textAbout = Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('About')
         .attr({ x:250 , y: 320, w: 200, h: 60 })
-        .textFont({ size: '24px', family: 'font-menu' })
+        .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
         .unselectable()
         .bind('Click', function() {
 
-            player.x = 270;
-            player.y = 320;
+            player.x = 275;
+            player.y = 350;
             player.animate('PlayerMovingRight', 8, -1);
             player.tween({x: 700}, 150);
             this.textColor('#ff0000',1);

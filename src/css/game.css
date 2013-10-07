@@ -1,5 +1,5 @@
-@font-face { font-family:font-fruit; src: url('../../assets/font/font-fruit-1.ttf') format('truetype'); }
-@font-face { font-family:font-menu; src: url('../../assets/font/font-menu-1.ttf') format('truetype'); }
+@font-face { font-family:font-toys; src: url('../../assets/font/broken-toys') format('truetype'); }
+@font-face { font-family:font-menu; src: url('../../assets/font/font-menu-2.ttf') format('truetype'); }
 @font-face { font-family:font-messages; src: url('../../assets/font/font-messages.ttf') format('truetype'); }
 
 
@@ -17,7 +17,7 @@
     font-family: 'Faster One', cursive;
     background: none;
     color: white;
-    _font-weight: 400;
+    font-weight: 400;
     float: left;
     width: 24%;
     text-align: center;

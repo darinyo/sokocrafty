@@ -75,10 +75,10 @@ Crafty.c('Fruit', {
 
     printMessageText: function(texto) {
 
-    var sizeFont = 50;
+    var sizeFont = 65;
     var lenChars = texto.length;
     var posX = ( ((Game.width()/2)) - (lenChars * sizeFont)/2);
-    var posY = ( ((Game.height()/2) - sizeFont));
+    var posY = ( (((Game.height() - Crafty.viewport.x)  /2) - sizeFont));
 
     var message = Crafty.e('2D, DOM, Text, Tween')
         .text(texto)
@@ -91,8 +91,8 @@ Crafty.c('Fruit', {
         Crafty.audio.play("alarm",1);
         Crafty.viewport.centerOn(message);
         setTimeout(function(){
-            message.tween({alpha: 0.0, x:640, }, 80);
-        },1000);
+            message.tween({alpha: 0.0, x:640 }, 80);
+        },800);
 
         message.bind('TweenEnd', function(e) {
             Crafty.viewport.centerOn(Crafty('PlayerCharacter'));
