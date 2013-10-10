@@ -48,6 +48,23 @@ Crafty.scene('Options', function() {
             txtDifficulty.text("Difficulty: " + getTextDifficulty());
         });
 
+    var txtMenuAtras = Crafty.e('2D, DOM, Mouse, Text, Tween')
+        .text("<< Volver")
+        .attr({ x:425 , y:395, w:200, h:70 })
+        .textFont({ size:'64px', family: 'font-menu' })
+        .textColor('#ffffff',1)
+        .css(text_css)
+        .unselectable()
+        .bind('Click', function(e) {
+            Crafty.scene('Menu');
+        })
+        .bind('MouseOver', function(e) {
+            this.textColor('#ff0000',1);
+        })
+        .bind('MouseOut', function(e) {
+            this.textColor('#ffffff',1);
+        });
+
 
     function getOnOffByValue(varialbe)
     {
