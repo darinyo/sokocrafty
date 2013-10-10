@@ -88,7 +88,10 @@ Crafty.c('Fruit', {
         .css(text_css)
         .unselectable();
 
-        Crafty.audio.play("alarm",1);
+        if (SOUND == 1) {
+            Crafty.audio.play("alarm",1);
+        }
+
         Crafty.viewport.centerOn(message);
         setTimeout(function(){
             message.tween({alpha: 0.0, x:640 }, 80);
@@ -114,7 +117,6 @@ Crafty.c('Fruit', {
 
     decreaseTtl: function() {
         this._ttl--;
-        console.log(this);
         if (this._ttl == 0) {
             this.destroy()
         }
