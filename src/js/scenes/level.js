@@ -16,7 +16,6 @@ Crafty.scene('Level', function() {
     printBackground();
     printCurrentMap();
     printStadistics();
-    printMenuButtons();
     printPlayer();
     initTimer();
     initEvents();
