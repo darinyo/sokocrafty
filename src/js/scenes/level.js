@@ -10,6 +10,7 @@ Crafty.scene('Level', function() {
 
     var player;
     var current_level = levels[CURRENT_LEVEL];
+    var timeOutFruits;
     BOXS_ON_FINISH = 0;
 
     printBackground();
@@ -27,6 +28,7 @@ Crafty.scene('Level', function() {
     function printBackground() {
         Crafty.background('url("assets/images/bg2.jpg")');
         $('#scoreboard').show();
+        $('#ingameMenu').show();
     }
 
     function printCurrentMap() {
@@ -64,21 +66,6 @@ Crafty.scene('Level', function() {
         $('#level').html('0'+current_level['level']);
     }
 
-    function printMenuButtons() {
-        return;
-        Crafty.e('2D, DOM, Mouse, Image')
-        .attr({ x:400 , y: 300, w: 64, h: 64})
-        .image('assets/images/icons/64px/reload.png')
-        .bind('Click', function(){
-            LIVES --;
-            if (LIVES == 0) {
-                Crafty.scene('Game Over');
-            } else {
-                Crafty.scene('Level');
-            }
-        });
-    }
-
     function printPlayer() {
         // Print player
         player = Crafty.e('PlayerCharacter');
@@ -97,6 +84,7 @@ Crafty.scene('Level', function() {
             if (SECONDS == 0) {
                 LIVES--;
                 $('#lives').html('0'+LIVES);
+                clearTimeout(timeOutFruits);
                 window.clearInterval(level_timer);
                 if (LIVES == 0) {
                     Crafty.scene('Game Over');
@@ -109,8 +97,7 @@ Crafty.scene('Level', function() {
 
     function initEvents() {
 
-
-        setTimeout(createFruits, 2000);
+        timeOutFruits = setTimeout(createFruits, 2000);
 
         function createFruits() {
 
@@ -210,8 +197,28 @@ Crafty.scene('Level', function() {
             var maxWaitTime = 20; // Don't include the min time  -> max time = (15 + 20)
             var newFruitTime = minWaitTime + Math.floor( Math.random() * maxWaitTime ) + 1;
 
-            setTimeout(createFruits, newFruitTime*500);
+            timeOutFruits = setTimeout(createFruits, newFruitTime*1000);
         }
+
+        $('#restart').click(function(e) {
+            LIVES--;
+            printStadistics();
+            clearTimeout(timeOutFruits);
+            if (LIVES > 0) {
+                Crafty.scene('Level');
+            } else {
+                Crafty.scene('Game Over');
+            }
+        });
+
+        $('#return').click(function(e) {
+            LIVES--;
+            printStadistics();
+            clearTimeout(timeOutFruits);
+            Crafty.viewport.x = 0;
+            Crafty.viewport.y = 0;
+            Crafty.scene('Menu');
+        });
     }
 
     function centerMap() {

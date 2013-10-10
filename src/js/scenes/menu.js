@@ -12,6 +12,7 @@ Crafty.scene('Menu', function(){
     Crafty.background('url("assets/images/bg-game.png")');
 
     $('#scoreboard').hide();
+    $('#ingameMenu').hide();
 
     var player = Crafty.e('PlayerCharacterMenu').at(-1,-1);
     Crafty.e('2D, DOM, Mouse, Text, Tween')

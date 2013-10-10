@@ -23,3 +23,25 @@
     text-align: center;
 }
 
+
+
+#ingameMenu {
+    opacity: 0.8;
+    background: url('../../assets/images/bg-scoreboard.png') no-repeat;
+    height: 40px;
+    border-radius: 20px;
+    margin-top:415px;
+    position: relative;
+    z-index:2;
+}
+
+#ingameMenu div {
+    font-family: 'Faster One', cursive;
+    background: none;
+    color: white;
+    font-weight: 400;
+    float: left;
+    width: 24%;
+    text-align: center;
+}
+
