@@ -12,7 +12,7 @@ Crafty.scene('Options', function() {
 
     var txtSound = Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text("Sounds: " + getOnOffByValue(SOUND))
-        .attr({ x:0 , y:90, w:640, h:70 })
+        .attr({ x:0 , y:150, w:640, h:70 })
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor(getColorByValue(SOUND),getColorStrengByValue(SOUND))
         .css(text_css)
@@ -25,7 +25,7 @@ Crafty.scene('Options', function() {
 
     var txtMusic = Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text("Music: " + getOnOffByValue(MUSIC))
-        .attr({ x:0 , y:150, w:640, h:70 })
+        .attr({ x:0 , y:210, w:640, h:70 })
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor(getColorByValue(MUSIC),getColorStrengByValue(MUSIC))
         .css(text_css)
@@ -38,7 +38,7 @@ Crafty.scene('Options', function() {
 
     var txtDifficulty = Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text("Difficulty: " + getTextDifficulty())
-        .attr({ x:0 , y:210, w:640, h:70 })
+        .attr({ x:0 , y:270, w:640, h:70 })
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor('#ffff00',1)
         .css(text_css)
