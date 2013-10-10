@@ -20,6 +20,11 @@ var TOTAL_LEVELS    = 100;
 var CURRENT_LEVEL   = 52;
 var level_timer;
 
+var TXT_DIFFICULTY = ['EASY', 'MEDIUM', 'HARD'];
+var SOUND = 1;
+var DIFFICULTY = 0;
+var MUSIC = 1;
+
 var text_css = { 'text-align': 'center' }
 
 
