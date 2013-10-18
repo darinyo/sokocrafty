@@ -205,6 +205,7 @@ Crafty.c('Lemon', {
     },
     eat: function(player) {
         this.modifyPlayerSpeed(player, 4);
+        this.printMessageText('speed up');
         var fruit = this;
         // Restart default values on 20 sec
         setTimeout(function(){
@@ -212,14 +213,12 @@ Crafty.c('Lemon', {
         }, 20000);
     },
     modifyPlayerSpeed: function(player, speed) {
-        console.log(speed);
         MOVEMENT_UNITS = speed;
         player.requires('Actor, Fourway, Color, spr_player, Collision, SpriteAnimation')
             .fourway(MOVEMENT_UNITS)
             .stopOnWall()
             .moveBoxs()
             .eatSomeFruit();
-        this.printMessageText('speed up');
     }
 });
 
