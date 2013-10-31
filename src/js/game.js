@@ -17,7 +17,7 @@ var BOXS_ON_FINISH  = 0;
  * Contador del tiempo de juego
  */
 var TOTAL_LEVELS    = 100;
-var CURRENT_LEVEL   = 52;
+var CURRENT_LEVEL   = 1;
 var level_timer;
 
 var TXT_DIFFICULTY = ['EASY', 'MEDIUM', 'HARD'];
