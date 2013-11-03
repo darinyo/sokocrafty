@@ -13,6 +13,7 @@ Crafty.scene('Level', function() {
     var timeOutFruits;
     BOXS_ON_FINISH = 0;
 
+    init();
     printBackground();
     printCurrentMap();
     printStadistics();
@@ -24,6 +25,11 @@ Crafty.scene('Level', function() {
     /*************************************************/
     /**                HELPERS                      **/
     /*************************************************/
+    function init() {
+        eventsDestroy();
+    }
+
+
     function printBackground() {
         Crafty.background('url("assets/images/bg2.jpg")');
         $('#scoreboard').show();
@@ -199,25 +205,38 @@ Crafty.scene('Level', function() {
             timeOutFruits = setTimeout(createFruits, newFruitTime*1000);
         }
 
+        $('#restart').unbind('click');
         $('#restart').click(function(e) {
-            LIVES--;
-            printStadistics();
-            clearTimeout(timeOutFruits);
+            if (LIVES > 0) {
+                LIVES--;
+                printStadistics();
+            }
+
+
             if (LIVES > 0) {
                 Crafty.scene('Level');
             } else {
+                eventsDestroy();
                 Crafty.scene('Game Over');
             }
         });
 
+        $('#return').unbind('click');
         $('#return').click(function(e) {
-            LIVES--;
-            printStadistics();
-            clearTimeout(timeOutFruits);
+            if (LIVES > 0) {
+                LIVES--;
+                printStadistics();
+            }
+            eventsDestroy();
             Crafty.viewport.x = 0;
             Crafty.viewport.y = 0;
             Crafty.scene('Menu');
         });
+    }
+
+    function eventsDestroy(){
+        clearInterval(level_timer);
+        clearTimeout(timeOutFruits);
     }
 
     function centerMap() {

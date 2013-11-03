@@ -10,7 +10,7 @@ Crafty.scene('Menu', function(){
 //    Crafty.audio.play("bgMusic", -1);
 
     Crafty.background('url("assets/images/bg-game.png")');
-
+    LIVES = 3;
     $('#scoreboard').hide();
     $('#ingameMenu').hide();
 
