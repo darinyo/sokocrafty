@@ -22,7 +22,7 @@ Crafty.scene('Select Level', function() {
     };
 
     var levelBlocked = function() {
-        console.log('Sorry, level blocked');
+        alert('Sorry, level blocked');
     }
 
 
@@ -52,7 +52,7 @@ Crafty.scene('Select Level', function() {
             var image = "assets/images/candado.png";
             var attr = { x:x_pos + 75 , y: y_pos + 30, w: 100, h: 58, level: i+1};
             // var onclick = levelBlocked;
-            var onclick = loadLevel;
+            var onclick = levelBlocked;
         }
 
         // TEXT NUM LEVEL
