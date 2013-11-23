@@ -16,6 +16,7 @@ Crafty.scene('Options', function() {
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor(getColorByValue(SOUND),getColorStrengByValue(SOUND))
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function(e) {
             changeSound();
@@ -29,6 +30,7 @@ Crafty.scene('Options', function() {
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor(getColorByValue(MUSIC),getColorStrengByValue(MUSIC))
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function(e) {
             changeMusic();
@@ -42,6 +44,7 @@ Crafty.scene('Options', function() {
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor('#ffff00',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function(e) {
             changeDifficulty();
@@ -54,6 +57,7 @@ Crafty.scene('Options', function() {
         .textFont({ size:'64px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function(e) {
             Crafty.scene('Menu');

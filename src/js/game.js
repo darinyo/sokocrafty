@@ -26,6 +26,7 @@ var DIFFICULTY = 0;
 var MUSIC = 1;
 
 var text_css = { 'text-align': 'center' }
+var itemMenuPointer_css = { 'cursor': 'pointer' }
 
 
 Game = {

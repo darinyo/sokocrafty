@@ -14,6 +14,8 @@ Crafty.scene('Menu', function(){
     $('#scoreboard').hide();
     $('#ingameMenu').hide();
 
+    var menuActivo = false;
+
     var player = Crafty.e('PlayerCharacterMenu').at(-1,-1);
     Crafty.e('2D, DOM, Mouse, Text, Tween')
         .text('Play')
@@ -21,22 +23,26 @@ Crafty.scene('Menu', function(){
         .textFont({ size: '100px', family: 'font-menu' })
         .textColor('#ffff00',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function() {
+            if (!menuActivo) {
+                menuActivo = true;
+                player.x = 265;
+                player.y = 170;
+                player.animate('PlayerMovingRight', 8, -1);
+                player.tween({x: 700}, 150);
+                this.textColor('#ff0000',1);
+                this.tween({x: 700}, 155).bind('TweenEnd', function(e) {
+                    if (localStorage != undefined && localStorage.levels_completed){
+                        CURRENT_LEVEL = localStorage.levels_completed;
+                    }
+                    menuActivo = false;
+                    Crafty.scene('Level');
+                });
+            }
 
-            player.x = 265;
-            player.y = 170;
-            player.animate('PlayerMovingRight', 8, -1);
-            player.tween({x: 700}, 150);
-            this.textColor('#ff0000',1);
-            this.tween({x: 700}, 155).bind('TweenEnd', function(e) {
-                if (localStorage != undefined && localStorage.levels_completed){
-                    CURRENT_LEVEL = localStorage.levels_completed;
-                }
-                Crafty.scene('Level');
-            });
-
-        })
+            })
         .bind('MouseOver', function(e) {
             this.textColor('#000000',1);
         })
@@ -51,16 +57,18 @@ Crafty.scene('Menu', function(){
         .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function() {
-
-            player.x = 280;
-            player.y = 250;
-            player.animate('PlayerMovingRight', 8, -1);
-            player.tween({x: 700}, 150);
-            this.textColor('#ff0000',1);
-            this.tween({x: 700}, 155);
-
+            if (!menuActivo) {
+                menuActivo = true;
+                player.x = 280;
+                player.y = 250;
+                player.animate('PlayerMovingRight', 8, -1);
+                player.tween({x: 700}, 150);
+                this.textColor('#ff0000',1);
+                this.tween({x: 700}, 155);
+            }
         })
         .bind('MouseOver', function(e) {
             this.textColor('#ff0000',1);
@@ -69,6 +77,7 @@ Crafty.scene('Menu', function(){
             this.textColor('#ffffff',1);
         })
         .bind('TweenEnd', function(e) {
+            menuActivo = false;
             Crafty.scene('Select Level');
         });
 
@@ -78,15 +87,18 @@ Crafty.scene('Menu', function(){
         .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function() {
-
-            player.x = 255;
-            player.y = 295;
-            player.animate('PlayerMovingRight', 8, -1);
-            player.tween({x: 700}, 150);
-            this.textColor('#ff0000',1);
-            this.tween({x: 700}, 150);
+            if (!menuActivo) {
+                menuActivo = true;
+                player.x = 255;
+                player.y = 295;
+                player.animate('PlayerMovingRight', 8, -1);
+                player.tween({x: 700}, 150);
+                this.textColor('#ff0000',1);
+                this.tween({x: 700}, 150);
+            }
 
         })
         .bind('MouseOver', function(e) {
@@ -96,6 +108,7 @@ Crafty.scene('Menu', function(){
             this.textColor('#ffffff',1);
         })
         .bind('TweenEnd', function(e) {
+            menuActivo = false;
             Crafty.scene('Options');
         });
 
@@ -108,15 +121,18 @@ Crafty.scene('Menu', function(){
         .textFont({ size: '60px', family: 'font-menu' })
         .textColor('#ffffff',1)
         .css(text_css)
+        .css(itemMenuPointer_css)
         .unselectable()
         .bind('Click', function() {
-
-            player.x = 275;
-            player.y = 350;
-            player.animate('PlayerMovingRight', 8, -1);
-            player.tween({x: 700}, 150);
-            this.textColor('#ff0000',1);
-            this.tween({x: 700}, 155);
+            if (!menuActivo) {
+                menuActivo = true;
+                player.x = 275;
+                player.y = 350;
+                player.animate('PlayerMovingRight', 8, -1);
+                player.tween({x: 700}, 150);
+                this.textColor('#ff0000',1);
+                this.tween({x: 700}, 155);
+            }
 
         })
         .bind('MouseOver', function(e) {
@@ -126,6 +142,7 @@ Crafty.scene('Menu', function(){
             this.textColor('#ffffff',1);
         })
         .bind('TweenEnd', function(e) {
+            menuActivo = false;
             Crafty.scene('About');
         });
 

@@ -17,6 +17,24 @@ Crafty.scene('About', function() {
     Crafty.background('url("assets/images/bg-about.png")');
     creditsAll();
 
+    var txtMenuAtras = Crafty.e('2D, DOM, Mouse, Text, Tween')
+        .text("<< Volver")
+        .attr({ x:425 , y:395, w:200, h:70 })
+        .textFont({ size:'64px', family: 'font-menu' })
+        .textColor('#ffffff',1)
+        .css(text_css)
+        .css(itemMenuPointer_css)
+        .unselectable()
+        .bind('Click', function(e) {
+            Crafty.scene('Menu');
+        })
+        .bind('MouseOver', function(e) {
+            this.textColor('#ff0000',1);
+        })
+        .bind('MouseOut', function(e) {
+            this.textColor('#ffffff',1);
+        });
+
 
 });
 
@@ -38,7 +56,5 @@ function addCreditsAuthor(name, color, fontsize, maxY, duration)
         .css(text_css)
         .unselectable()
         .tween({y: maxY}, duration);
-//        .bind('TweenEnd', function(e) {
-////           this.destroy();
-//        });
+
 }
